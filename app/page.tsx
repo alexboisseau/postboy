@@ -1,7 +1,9 @@
+import PrepareRequest from "@/components/PrepareRequest/PrepareRequest";
+
 export default function Home() {
   return (
-    <main>
-      <h1>Postman Like</h1>
+    <main className="w-screen h-screen flex flex-col items-center justify-center">
+      <PrepareRequest />
     </main>
   );
 }
