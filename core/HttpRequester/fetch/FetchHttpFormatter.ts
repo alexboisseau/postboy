@@ -47,10 +47,6 @@ export class FetchHttpFormatter {
   ): Promise<HttpResponseSize> {
     const contentLength = await this.calculateContentLength(response, blob);
     const headersLength = await this.calculateHeadersLength(headers);
-
-    console.log(contentLength);
-    console.log(headersLength);
-
     const bytes = contentLength + headersLength;
 
     return formatBytes(bytes);
@@ -80,8 +76,6 @@ export class FetchHttpFormatter {
     for (const key in headers) {
       headersArray.push(key);
       headersArray.push(headers[key]);
-
-      console.log(key, headers[key]);
     }
 
     return new Blob(headersArray).size;
