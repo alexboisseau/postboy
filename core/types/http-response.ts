@@ -1,6 +1,8 @@
+import { SizeUnit } from "./size-units";
+
 export type HttpResponseSize = {
   value: number;
-  unit: "Bytes" | "KB" | "MB" | "GB";
+  unit: SizeUnit;
 };
 
 export type HttpResponseHeaders = Record<string, string>;
