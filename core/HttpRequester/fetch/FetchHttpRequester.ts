@@ -9,13 +9,17 @@ class FetchHttpRequester implements IHttpRequester {
   ) {}
 
   public async sendRequest(request: HttpRequest): Promise<HttpResponse> {
-    const start = performance.now();
-    const response = await fetch(request.url, {
-      method: request.method,
-    });
-    const end = performance.now();
+    try {
+      const start = performance.now();
+      const response = await fetch(request.url, {
+        method: request.method,
+      });
+      const end = performance.now();
 
-    return this.formatter.formatResponse({ response, start, end });
+      return await this.formatter.formatResponse({ response, start, end });
+    } catch (error) {
+      throw error;
+    }
   }
 }
 
