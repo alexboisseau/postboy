@@ -1,15 +1,8 @@
+import { ActivatableKeyValue } from "./activatable-key-value";
 import { HttpMethod } from "./http-method";
 
-type ActivableKeyValue = {
-  key: string;
-  value: string;
-  active: boolean;
-};
-
-export type QueryParameter = ActivableKeyValue;
-
-export type Header = ActivableKeyValue;
-
+export type QueryParameter = ActivatableKeyValue;
+export type Header = ActivatableKeyValue;
 export type HttpRequest = {
   method: HttpMethod;
   url: string;
