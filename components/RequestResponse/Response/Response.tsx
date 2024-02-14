@@ -1,16 +1,17 @@
-import { HttpResponse } from "@/core/types/http-response";
+import { useContext } from "react";
+import { RequestResponseContext } from "../context";
 
-type ResponseHeaderProps = {
-  isLoading: boolean;
-  response: HttpResponse | null;
-};
+function ResponseHeader() {
+  const {
+    httpRequestForm: { isSubmitting },
+    response: { response },
+  } = useContext(RequestResponseContext);
 
-function ResponseHeader({ isLoading, response }: ResponseHeaderProps) {
   return (
     <div className="flex justify-between">
-      <p className="mb-1 text-gray-700">Response</p>
+      <p className="text-lg font-semibold text-gray-800">Response</p>
       <div>
-        {isLoading && <p className="text-sm text-gray-600">Loading...</p>}
+        {isSubmitting && <p className="text-sm text-gray-600">Loading...</p>}
         {response !== null && (
           <div className="flex gap-4">
             <p className="text-sm text-gray-600">
@@ -43,20 +44,14 @@ function ResponseError() {
   );
 }
 
-type ResponseProps = {
-  error: string | null;
-  isLoading: boolean;
-  response: HttpResponse | null;
-};
+export default function Response() {
+  const {
+    response: { error },
+  } = useContext(RequestResponseContext);
 
-export default function Response({
-  error,
-  isLoading,
-  response,
-}: ResponseProps) {
   return (
     <div className="flex flex-col gap-4">
-      <ResponseHeader isLoading={isLoading} response={response} />
+      <ResponseHeader />
       {error && <ResponseError />}
     </div>
   );
