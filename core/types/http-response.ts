@@ -5,11 +5,14 @@ export type HttpResponseSize = {
   unit: SizeUnit;
 };
 
-export type HttpResponseHeaders = Record<string, string>;
+export type HttpResponseHeader = {
+  key: string;
+  value: string;
+};
 
 export type HttpResponse = {
   body: string;
-  headers: HttpResponseHeaders;
+  headers: HttpResponseHeader[];
   size: HttpResponseSize;
   status: number;
   statusText: string;

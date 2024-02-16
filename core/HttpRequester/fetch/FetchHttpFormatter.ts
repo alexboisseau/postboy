@@ -1,6 +1,6 @@
 import {
   HttpResponse,
-  HttpResponseHeaders,
+  HttpResponseHeader,
   HttpResponseSize,
 } from "@/core/types/http-response";
 import { formatBytes } from "@/core/utils/format-bytes";
@@ -43,7 +43,7 @@ export class FetchHttpFormatter {
   private async formatSize(
     response: Response,
     blob: Blob,
-    headers: HttpResponseHeaders
+    headers: HttpResponseHeader[]
   ): Promise<HttpResponseSize> {
     const contentLength = await this.calculateContentLength(response, blob);
     const headersLength = await this.calculateHeadersLength(headers);
@@ -54,11 +54,11 @@ export class FetchHttpFormatter {
 
   private async formatHeaders(
     response: Response
-  ): Promise<HttpResponseHeaders> {
-    const headers: Record<string, string> = {};
+  ): Promise<HttpResponseHeader[]> {
+    const headers: HttpResponseHeader[] = [];
 
     response.headers.forEach((value: string, key: string) => {
-      headers[key] = value;
+      headers.push({ key, value });
     });
 
     return headers;
@@ -69,16 +69,9 @@ export class FetchHttpFormatter {
   }
 
   private async calculateHeadersLength(
-    headers: HttpResponseHeaders
+    headers: HttpResponseHeader[]
   ): Promise<number> {
-    const headersArray: string[] = [];
-
-    for (const key in headers) {
-      headersArray.push(key);
-      headersArray.push(headers[key]);
-    }
-
-    return new Blob(headersArray).size;
+    return new Blob(headers.map((header) => header.key + header.value)).size;
   }
 
   private async calculateContentLength(
