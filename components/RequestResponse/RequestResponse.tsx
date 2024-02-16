@@ -1,7 +1,7 @@
 "use client";
 import RequestForm from "./RequestForm/RequestForm";
 import Response from "./Response/Response";
-import { RequestResponseProvider } from "./context";
+import { RequestResponseProvider } from "./state/provider";
 
 export default function RequestResponse() {
   return (

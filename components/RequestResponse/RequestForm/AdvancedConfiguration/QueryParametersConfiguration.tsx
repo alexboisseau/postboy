@@ -1,21 +1,23 @@
 import { useContext } from "react";
-import { RequestResponseContext } from "../../context";
+import { RequestResponseActionTypes } from "../../state/actions";
+import { RequestResponseContext } from "../../state/context";
 import { Button } from "@/components/ui/button";
 import { ActivatableKeyValue } from "@/core/types/activatable-key-value";
 import ActivatableKeyValueTable from "./ActivatableKeyValueTable";
-import { RequestFormActionTypes } from "../actions";
 
 export default function QueryParametersConfiguration() {
   const {
-    httpRequestForm: {
-      fields: { queryParameters },
+    requestResponse: {
+      request: {
+        fields: { queryParameters },
+      },
     },
-    dispatchHttpRequestFormAction,
+    dispatchRequestResponseAction,
   } = useContext(RequestResponseContext);
 
   const handleCheckedAll = (checked: boolean) => {
-    dispatchHttpRequestFormAction({
-      type: RequestFormActionTypes.CHECK_ALL_QUERY_PARAMETERS,
+    dispatchRequestResponseAction({
+      type: RequestResponseActionTypes.REQUEST_CHECK_ALL_QUERY_PARAMETERS,
       payload: checked,
     });
   };
@@ -24,8 +26,8 @@ export default function QueryParametersConfiguration() {
     updatedParam: ActivatableKeyValue,
     index: number
   ) => {
-    dispatchHttpRequestFormAction({
-      type: RequestFormActionTypes.UPDATE_QUERY_PARAMETER,
+    dispatchRequestResponseAction({
+      type: RequestResponseActionTypes.REQUEST_UPDATE_QUERY_PARAMETER,
       payload: {
         index,
         queryParameter: updatedParam,
@@ -34,14 +36,14 @@ export default function QueryParametersConfiguration() {
   };
 
   const handleNewParam = () => {
-    dispatchHttpRequestFormAction({
-      type: RequestFormActionTypes.ADD_NEW_QUERY_PARAMETER,
+    dispatchRequestResponseAction({
+      type: RequestResponseActionTypes.REQUEST_NEW_QUERY_PARAMETER,
     });
   };
 
   const handleRemoveParam = (index: number) => {
-    dispatchHttpRequestFormAction({
-      type: RequestFormActionTypes.REMOVE_QUERY_PARAMETER,
+    dispatchRequestResponseAction({
+      type: RequestResponseActionTypes.REQUEST_REMOVE_QUERY_PARAMETER,
       payload: index,
     });
   };

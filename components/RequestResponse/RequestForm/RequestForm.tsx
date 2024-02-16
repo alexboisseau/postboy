@@ -1,5 +1,7 @@
 "use client";
 import { ChangeEvent, useContext } from "react";
+import { RequestResponseContext } from "../state/context";
+import AdvancedConfiguration from "./AdvancedConfiguration/AdvancedConfiguration";
 import { Input } from "../../ui/input";
 import {
   Select,
@@ -9,28 +11,28 @@ import {
   SelectValue,
 } from "../../ui/select";
 import { Button } from "../../ui/button";
-import AdvancedConfiguration from "./AdvancedConfiguration/AdvancedConfiguration";
 import { HttpMethod } from "@/core/types/http-method";
-import { RequestResponseContext } from "../context";
-import { RequestFormActionTypes } from "./actions";
+import { RequestResponseActionTypes } from "../state/actions";
 
 export default function RequestForm() {
   const {
+    requestResponse: {
+      request: { fields, errors, isSubmitting },
+    },
+    dispatchRequestResponseAction,
     handleSend,
-    httpRequestForm: { errors, fields, isSubmitting },
-    dispatchHttpRequestFormAction,
   } = useContext(RequestResponseContext);
 
   const handleUrlChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatchHttpRequestFormAction({
-      type: RequestFormActionTypes.UPDATE_URL,
+    dispatchRequestResponseAction({
+      type: RequestResponseActionTypes.REQUEST_UPDATE_URL,
       payload: e.target.value,
     });
   };
 
   const handleSelectChange = (value: HttpMethod) => {
-    dispatchHttpRequestFormAction({
-      type: RequestFormActionTypes.UPDATE_HTTP_METHOD,
+    dispatchRequestResponseAction({
+      type: RequestResponseActionTypes.REQUEST_UPDATE_HTTP_METHOD,
       payload: value,
     });
   };

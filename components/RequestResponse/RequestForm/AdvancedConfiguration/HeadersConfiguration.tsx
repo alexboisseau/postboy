@@ -1,21 +1,23 @@
 import { useContext } from "react";
-import { RequestResponseContext } from "../../context";
+import { RequestResponseActionTypes } from "../../state/actions";
+import { RequestResponseContext } from "../../state/context";
 import ActivatableKeyValueTable from "./ActivatableKeyValueTable";
 import { Button } from "@/components/ui/button";
 import { ActivatableKeyValue } from "@/core/types/activatable-key-value";
-import { RequestFormActionTypes } from "../actions";
 
 export default function HeadersConfiguration() {
   const {
-    httpRequestForm: {
-      fields: { headers },
+    requestResponse: {
+      request: {
+        fields: { headers },
+      },
     },
-    dispatchHttpRequestFormAction,
+    dispatchRequestResponseAction,
   } = useContext(RequestResponseContext);
 
   const handleCheckedAll = (checked: boolean) => {
-    dispatchHttpRequestFormAction({
-      type: RequestFormActionTypes.CHECK_ALL_HEADERS,
+    dispatchRequestResponseAction({
+      type: RequestResponseActionTypes.REQUEST_CHECK_ALL_HEADERS,
       payload: checked,
     });
   };
@@ -24,8 +26,8 @@ export default function HeadersConfiguration() {
     updatedParam: ActivatableKeyValue,
     index: number
   ) => {
-    dispatchHttpRequestFormAction({
-      type: RequestFormActionTypes.UPDATE_HEADER,
+    dispatchRequestResponseAction({
+      type: RequestResponseActionTypes.REQUEST_UPDATE_HEADER,
       payload: {
         index,
         header: updatedParam,
@@ -34,14 +36,14 @@ export default function HeadersConfiguration() {
   };
 
   const handleNewParam = () => {
-    dispatchHttpRequestFormAction({
-      type: RequestFormActionTypes.ADD_HEADER,
+    dispatchRequestResponseAction({
+      type: RequestResponseActionTypes.REQUEST_NEW_HEADER,
     });
   };
 
   const handleRemoveParam = (index: number) => {
-    dispatchHttpRequestFormAction({
-      type: RequestFormActionTypes.REMOVE_HEADER,
+    dispatchRequestResponseAction({
+      type: RequestResponseActionTypes.REQUEST_REMOVE_HEADER,
       payload: index,
     });
   };
