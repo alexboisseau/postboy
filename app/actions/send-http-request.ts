@@ -6,12 +6,20 @@ import { HttpResponse } from "@/core/types/http-response";
 import { z } from "zod";
 
 const httpRequestSchema = z.object({
+  headers: z.array(
+    z.object({
+      key: z.string(),
+      value: z.string(),
+      active: z.boolean(),
+    })
+  ),
   url: z.string().url(),
   method: z.enum(HttpMethods),
 });
 
 function validateIncomingRequest(request: HttpRequest): boolean {
-  return httpRequestSchema.safeParse(request).success;
+  const result = httpRequestSchema.safeParse(request);
+  return result.success;
 }
 
 export async function sendHttpRequest(

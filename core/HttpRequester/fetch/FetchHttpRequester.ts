@@ -1,4 +1,4 @@
-import { HttpRequest } from "../../types/http-request";
+import { Header, HttpRequest } from "../../types/http-request";
 import { HttpResponse } from "../../types/http-response";
 import { IHttpRequester } from "../HttpRequester.interface";
 import { FetchHttpFormatter } from "./FetchHttpFormatter";
@@ -13,6 +13,7 @@ class FetchHttpRequester implements IHttpRequester {
       const start = performance.now();
       const response = await fetch(request.url, {
         method: request.method,
+        headers: this.prepareHeaders(request.headers),
       });
       const end = performance.now();
 
@@ -20,6 +21,18 @@ class FetchHttpRequester implements IHttpRequester {
     } catch (error) {
       throw error;
     }
+  }
+
+  private prepareHeaders(headers: Header[]): Headers {
+    const preparedHeaders = new Headers();
+
+    headers.forEach((header) => {
+      if (header.active) {
+        preparedHeaders.append(header.key, header.value);
+      }
+    });
+
+    return preparedHeaders;
   }
 }
 

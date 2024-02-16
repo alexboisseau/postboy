@@ -34,7 +34,9 @@ export function RequestResponseProvider({
       return;
     }
 
+    console.log(requestResponse.request.fields.headers);
     sendHttpRequest({
+      headers: requestResponse.request.fields.headers,
       method: requestResponse.request.fields.httpMethod,
       url: requestResponse.request.fields.url,
     })
