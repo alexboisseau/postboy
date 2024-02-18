@@ -10,8 +10,21 @@ export type HttpResponseHeader = {
   value: string;
 };
 
+export type HttpCookie = {
+  key: string;
+  value: string;
+  domain?: string;
+  path?: string;
+  expires?: string;
+  maxAge?: string;
+  httpOnly?: boolean;
+  secure?: boolean;
+  sameSite?: "lax" | "strict" | "none";
+};
+
 export type HttpResponse = {
   body: string;
+  cookies: HttpCookie[];
   headers: HttpResponseHeader[];
   size: HttpResponseSize;
   status: number;

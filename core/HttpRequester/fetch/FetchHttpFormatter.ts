@@ -1,4 +1,5 @@
 import {
+  HttpCookie,
   HttpResponse,
   HttpResponseHeader,
   HttpResponseSize,
@@ -18,12 +19,14 @@ export class FetchHttpFormatter {
     const blob = await this.extractResponseBlob(response);
 
     const body = await this.formatBody(blob);
-    const headers = await this.formatHeaders(response);
+    const headers = this.formatHeaders(response);
+    const cookies = this.formatCookies(response);
     const size = await this.formatSize(response, blob, headers);
     const time = this.formatTime(start, end);
 
     return {
       body: body,
+      cookies: cookies,
       headers: headers,
       size: size,
       status: response.status,
@@ -52,9 +55,7 @@ export class FetchHttpFormatter {
     return formatBytes(bytes);
   }
 
-  private async formatHeaders(
-    response: Response
-  ): Promise<HttpResponseHeader[]> {
+  private formatHeaders(response: Response): HttpResponseHeader[] {
     const headers: HttpResponseHeader[] = [];
 
     response.headers.forEach((value: string, key: string) => {
@@ -62,6 +63,63 @@ export class FetchHttpFormatter {
     });
 
     return headers;
+  }
+
+  private formatCookies(response: Response): Array<HttpCookie> {
+    const cookies = response.headers.getSetCookie();
+
+    return cookies.map((c) => {
+      const attributes = c.split(";").map((attr) => attr.trim());
+      const cookie: HttpCookie = {
+        key: "",
+        value: "",
+        httpOnly: false,
+        secure: false,
+      };
+
+      attributes.forEach((attr) => {
+        const index = attr.indexOf("=");
+        let key = "";
+        let value = "";
+        if (index > 0) {
+          key = attr.slice(0, index);
+          value = attr.slice(index + 1);
+        } else {
+          key = attr;
+          value = "";
+        }
+
+        switch (key.toLowerCase()) {
+          case "domain":
+            cookie.domain = value;
+            break;
+          case "path":
+            cookie.path = value;
+            break;
+          case "expires":
+            cookie.expires = value;
+            break;
+          case "max-age":
+            cookie.maxAge = value;
+            break;
+          case "httponly":
+            cookie.httpOnly = true;
+            break;
+          case "secure":
+            cookie.secure = true;
+            break;
+          case "samesite":
+            cookie.sameSite = value as "lax" | "strict" | "none";
+            break;
+          default:
+            cookie.key = key;
+            cookie.value = value;
+            break;
+        }
+      });
+
+      return cookie;
+    });
   }
 
   private formatTime(start: number, end: number): number {
