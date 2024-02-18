@@ -304,6 +304,10 @@ export function requestResponseReducer(
         ...state,
         request: {
           ...state.request,
+          errors: {
+            httpMethod: null,
+            url: null,
+          },
           isSubmitting: true,
         },
         response: {
