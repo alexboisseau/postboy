@@ -22,7 +22,7 @@ export default function KeyValueTable({
           <tbody>
             {data.map((row, index) => {
               return (
-                <tr key={index} className="hover:bg-gray-50">
+                <tr key={index} className="hover:bg-gray-50 text-sm">
                   <td className={tableRowsTwClasses}>{row.key}</td>
                   <td className={tableRowsTwClasses}>{row.value}</td>
                 </tr>

@@ -4,6 +4,7 @@ import ResponseHeader from "./ResponseHeader";
 import ResponseError from "./ResponseError";
 import { Button } from "@/components/ui/button";
 import KeyValueTable from "./KeyValueTable";
+import CookiesTable from "./CookiesTable";
 
 type ConfigTab = "headers" | "cookies" | "body";
 
@@ -69,6 +70,9 @@ export default function Response() {
       {response.error && <ResponseError />}
       {tab === "headers" && response.value !== null && (
         <KeyValueTable data={response.value.headers} />
+      )}
+      {tab === "cookies" && response.value !== null && (
+        <CookiesTable cookies={response.value.cookies} />
       )}
     </div>
   );
