@@ -27,7 +27,9 @@ export default function CookiesTable({ cookies }: { cookies: HttpCookie[] }) {
                   <td className={tableRowsTwClasses}>{cookie.value}</td>
                   <td className={tableRowsTwClasses}>{cookie.domain}</td>
                   <td className={tableRowsTwClasses}>{cookie.path}</td>
-                  <td className={tableRowsTwClasses}>{cookie.expires}</td>
+                  <td className={tableRowsTwClasses}>
+                    {cookie.expires === undefined ? "Session" : cookie.expires}
+                  </td>
                   <td className={tableRowsTwClasses}>
                     {cookie.httpOnly ? "true" : "false"}
                   </td>
