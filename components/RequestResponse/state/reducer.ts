@@ -1,5 +1,6 @@
 import { QueryParameter } from "@/core/types/http-request";
 import {
+  ContentType,
   RequestForm,
   RequestFormErrors,
   RequestResponse,
@@ -27,6 +28,23 @@ function generateUrl(url: string, queryParameters: QueryParameter[]): string {
   }
 
   return url;
+}
+
+function getContentTypeHeader(
+  contentType: ContentType,
+  state: RequestResponse
+): string {
+  if (contentType === "x-www-form-urlencoded") {
+    return "application/x-www-form-urlencoded";
+  } else if (contentType === "raw") {
+    if (state.request.fields.body.raw.language === "json") {
+      return "application/json";
+    } else if (state.request.fields.body.raw.language === "xml") {
+      return "application/xml";
+    }
+  }
+
+  return "";
 }
 
 export function validateRequestForm(form: RequestForm): {
@@ -62,6 +80,14 @@ export const initialRequestResponse: RequestResponse = {
       url: "",
       queryParameters: [],
       headers: [],
+      body: {
+        contentType: "none",
+        raw: {
+          language: "json",
+          value: "",
+        },
+        xWwwFormUrlencoded: [],
+      },
     },
     errors: {
       httpMethod: null,
@@ -288,6 +314,167 @@ export function requestResponseReducer(
       };
     }
 
+    case RequestResponseActionTypes.REQUEST_UPDATE_BODY_CONTENT_TYPE: {
+      const updatedHeaders = state.request.fields.headers.filter(
+        (header) => header.key !== "Content-Type"
+      );
+
+      if (action.payload !== "none") {
+        const contentTypeHeader = getContentTypeHeader(action.payload, state);
+        updatedHeaders.push({
+          key: "Content-Type",
+          value: contentTypeHeader,
+          active: true,
+        });
+      }
+
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            headers: updatedHeaders,
+            body: {
+              ...state.request.fields.body,
+              contentType: action.payload,
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_UPDATE_BODY_RAW_LANGUAGE: {
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            body: {
+              ...state.request.fields.body,
+              raw: {
+                ...state.request.fields.body.raw,
+                language: action.payload,
+              },
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_UPDATE_BODY_RAW_CONTENT: {
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            body: {
+              ...state.request.fields.body,
+              raw: {
+                ...state.request.fields.body.raw,
+                value: action.payload,
+              },
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_NEW_X_WWW_FORM_URLENCODED_RECORD: {
+      const record = {
+        key: "",
+        value: "",
+        active: true,
+      };
+
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            body: {
+              ...state.request.fields.body,
+              xWwwFormUrlencoded: [
+                ...state.request.fields.body.xWwwFormUrlencoded,
+                record,
+              ],
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_UPDATE_X_WWW_FORM_URLENCODED_RECORD: {
+      const updatedRecords = state.request.fields.body.xWwwFormUrlencoded.map(
+        (record, index) => {
+          if (index === action.payload.index) {
+            return action.payload.record;
+          }
+          return record;
+        }
+      );
+
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            body: {
+              ...state.request.fields.body,
+              xWwwFormUrlencoded: updatedRecords,
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_REMOVE_X_WWW_FORM_URLENCODED_RECORD: {
+      const updatedRecords =
+        state.request.fields.body.xWwwFormUrlencoded.filter(
+          (_, index) => index !== action.payload
+        );
+
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            body: {
+              ...state.request.fields.body,
+              xWwwFormUrlencoded: updatedRecords,
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_CHECK_ALL_X_WWW_FORM_URLENCODED_RECORDS: {
+      const updatedRecords = state.request.fields.body.xWwwFormUrlencoded.map(
+        (record) => {
+          return { ...record, active: action.payload };
+        }
+      );
+
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            body: {
+              ...state.request.fields.body,
+              xWwwFormUrlencoded: updatedRecords,
+            },
+          },
+        },
+      };
+    }
+
     case RequestResponseActionTypes.REQUEST_INVALID_FORM: {
       return {
         ...state,
@@ -343,6 +530,10 @@ export function requestResponseReducer(
           error: action.payload,
         },
       };
+    }
+
+    default: {
+      return state;
     }
   }
 }
