@@ -111,7 +111,10 @@ export function requestResponseReducer(
         ...state,
         request: {
           ...state.request,
-          method: action.payload,
+          fields: {
+            ...state.request.fields,
+            httpMethod: action.payload,
+          },
         },
       };
     }
