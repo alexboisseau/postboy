@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Button } from "../../../ui/button";
 import QueryParametersConfiguration from "./QueryParametersConfiguration";
 import HeadersConfiguration from "./HeadersConfiguration";
+import BodyConfiguration from "./BodyConfiguration/BodyConfiguration";
 
-type ConfigTab = "query-parameters" | "headers";
+type ConfigTab = "query-parameters" | "headers" | "body";
 
 type NavigationTabsProps = {
   configTab: ConfigTab;
@@ -35,6 +36,15 @@ function NavigationTabs({ configTab, setConfigTab }: NavigationTabsProps) {
       >
         Headers
       </Button>
+      <Button
+        variant="link"
+        className={getTabBtnTwClasses("body")}
+        onClick={() => {
+          setConfigTab("body");
+        }}
+      >
+        Body
+      </Button>
     </div>
   );
 }
@@ -47,6 +57,7 @@ export default function AdvancedConfiguration() {
       <NavigationTabs configTab={tab} setConfigTab={setTab} />
       {tab === "query-parameters" && <QueryParametersConfiguration />}
       {tab === "headers" && <HeadersConfiguration />}
+      {tab === "body" && <BodyConfiguration />}
     </div>
   );
 }
