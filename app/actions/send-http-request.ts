@@ -6,6 +6,7 @@ import { HttpResponse } from "@/core/types/http-response";
 import { z } from "zod";
 
 const httpRequestSchema = z.object({
+  body: z.string().nullable(),
   headers: z.array(
     z.object({
       key: z.string(),
