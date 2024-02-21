@@ -37,7 +37,7 @@ export default function RawEditor() {
   return (
     <ReactCodeMirror
       value={raw.value}
-      height="200px"
+      height="250px"
       onChange={handleChange}
       extensions={[languageMap[raw.language]()]}
       theme={githubLight}

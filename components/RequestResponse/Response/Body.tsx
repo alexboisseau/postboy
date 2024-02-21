@@ -27,7 +27,7 @@ export default function Body() {
   return (
     <ReactCodeMirror
       value={formattedContent ?? value?.body.value}
-      height="200px"
+      height="250px"
       extensions={language ? [language()] : []}
       theme={githubLight}
     />
