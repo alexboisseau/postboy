@@ -11,7 +11,7 @@ export default function ResponseHeader() {
 
   return (
     <div className="flex justify-between">
-      <p className="text-lg font-semibold text-gray-800">Response</p>
+      <p className="text-2xl font-semibold text-gray-800">Response</p>
       <div>
         {isSubmitting && <p className="text-sm text-gray-600">Loading...</p>}
         {response.value !== null && (

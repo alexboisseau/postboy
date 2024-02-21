@@ -31,7 +31,7 @@ export default function RequestFormHttpMethodSelect() {
   return (
     <div className="flex flex-col gap-1">
       <Select value={httpMethod} onValueChange={handleChange}>
-        <SelectTrigger className="w-40">
+        <SelectTrigger className="w-32">
           <SelectValue placeholder="HTTP Method" />
         </SelectTrigger>
         <SelectContent>
