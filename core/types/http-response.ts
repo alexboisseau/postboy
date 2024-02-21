@@ -23,7 +23,10 @@ export type HttpCookie = {
 };
 
 export type HttpResponse = {
-  body: string;
+  body: {
+    value: string;
+    contentType: string;
+  };
   cookies: HttpCookie[];
   headers: HttpResponseHeader[];
   size: HttpResponseSize;
