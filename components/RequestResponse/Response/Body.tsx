@@ -2,10 +2,9 @@ import ReactCodeMirror from "@uiw/react-codemirror";
 import { useContext, useEffect, useState } from "react";
 import { RequestResponseContext } from "../state/context";
 import { githubLight } from "@uiw/codemirror-theme-github";
-import {
-  formatContent,
-  getCodeMirrorLanguageFromContentTypeHeader,
-} from "@/lib/code-mirror-utils";
+
+import { getLanguageFromContentType } from "@/utils/code-mirror/get-language-from-content-type";
+import { formatContent } from "@/utils/prettier/formatContent";
 
 export default function Body() {
   const {
@@ -15,9 +14,7 @@ export default function Body() {
   } = useContext(RequestResponseContext);
   const [formattedContent, setFormattedContent] = useState<string | null>(null);
 
-  const language = getCodeMirrorLanguageFromContentTypeHeader(
-    value?.body.contentType || ""
-  );
+  const language = getLanguageFromContentType(value?.body.contentType || "");
 
   useEffect(() => {
     formatContent(value?.body.contentType || "", value?.body.value || "").then(
