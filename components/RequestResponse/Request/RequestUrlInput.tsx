@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { RequestResponseActionTypes } from "../state/actions";
 import { RequestResponseContext } from "../state/context";
 
-export default function RequestFormUrlInput() {
+export default function RequestUrlInput() {
   const {
     requestResponse: {
       request: {

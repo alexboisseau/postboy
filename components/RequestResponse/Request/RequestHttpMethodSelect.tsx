@@ -10,7 +10,7 @@ import { RequestResponseActionTypes } from "../state/actions";
 import { RequestResponseContext } from "../state/context";
 import { HttpMethod } from "@/core/types/http-method";
 
-export default function RequestFormHttpMethodSelect() {
+export default function RequestHttpMethodSelect() {
   const {
     requestResponse: {
       request: {

@@ -1,12 +1,12 @@
 "use client";
 import { useContext } from "react";
 import AdvancedConfiguration from "./AdvancedConfiguration/AdvancedConfiguration";
-import RequestFormHttpMethodSelect from "./RequestFormHttpMethodSelect";
-import RequestFormUrlInput from "./RequestFormUrlInput";
+import RequestHttpMethodSelect from "./RequestHttpMethodSelect";
+import RequestUrlInput from "./RequestUrlInput";
 import { RequestResponseContext } from "../state/context";
 import { Button } from "../../ui/button";
 
-export default function RequestForm() {
+export default function Request() {
   const {
     requestResponse: {
       request: { fields, isSubmitting },
@@ -18,8 +18,8 @@ export default function RequestForm() {
     <div className="flex flex-col gap-2">
       <p className="text-2xl font-semibold text-gray-800">Request</p>
       <div className="flex gap-1">
-        <RequestFormHttpMethodSelect />
-        <RequestFormUrlInput />
+        <RequestHttpMethodSelect />
+        <RequestUrlInput />
         <Button
           onClick={handleSend}
           disabled={isSubmitting || Boolean(fields.url) === false}
