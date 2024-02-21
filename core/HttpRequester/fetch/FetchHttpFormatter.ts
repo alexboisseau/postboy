@@ -18,8 +18,8 @@ export class FetchHttpFormatter {
   }): Promise<HttpResponse> {
     const blob = await this.extractResponseBlob(response);
 
-    const body = await this.formatBody(blob);
     const headers = this.formatHeaders(response);
+    const body = await this.formatBody(blob, headers);
     const cookies = this.formatCookies(response);
     const size = await this.formatSize(response, blob, headers);
     const time = this.formatTime(start, end);
@@ -39,8 +39,31 @@ export class FetchHttpFormatter {
     return await response.blob();
   }
 
-  private async formatBody(blob: Blob): Promise<string> {
-    return await blob.text();
+  private async formatBody(
+    blob: Blob,
+    headers: HttpResponseHeader[]
+  ): Promise<{
+    value: string;
+    contentType: string;
+  }> {
+    const value = await blob.text();
+
+    const contentTypeHeader = headers.find(
+      (header) => header.key.toLowerCase() === "content-type"
+    );
+
+    if (contentTypeHeader) {
+      const [contentType] = contentTypeHeader.value.split(";");
+      return {
+        value,
+        contentType,
+      };
+    }
+
+    return {
+      value,
+      contentType: "text/plain",
+    };
   }
 
   private async formatSize(
