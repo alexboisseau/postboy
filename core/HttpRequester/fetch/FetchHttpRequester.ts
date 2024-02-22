@@ -12,6 +12,7 @@ class FetchHttpRequester implements IHttpRequester {
     try {
       const start = performance.now();
       const response = await fetch(request.url, {
+        body: request.body,
         method: request.method,
         headers: this.prepareHeaders(request.headers),
       });
