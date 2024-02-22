@@ -13,13 +13,13 @@ import { HttpMethod } from "@/core/types/http-method";
 const httpMethodColors: {
   [K in HttpMethod]: string;
 } = {
-  GET: "text-green-500",
-  POST: "text-blue-500",
-  PUT: "text-yellow-500",
-  PATCH: "text-yellow-500",
-  DELETE: "text-red-500",
-  OPTIONS: "text-gray-500",
-  HEAD: "text-gray-500",
+  GET: "text-green-600",
+  POST: "text-blue-600",
+  PUT: "text-yellow-600",
+  PATCH: "text-yellow-600",
+  DELETE: "text-red-600",
+  OPTIONS: "text-gray-600",
+  HEAD: "text-gray-600",
 };
 
 export default function RequestHttpMethodSelect() {
