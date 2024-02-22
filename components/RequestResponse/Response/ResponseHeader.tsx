@@ -21,7 +21,7 @@ export default function ResponseHeader() {
     ) {
       return "text-red-600";
     } else {
-      return "text-gray-600";
+      return "text-slate-600";
     }
   }, [response.value?.status]);
 
@@ -29,22 +29,22 @@ export default function ResponseHeader() {
 
   return (
     <div className="flex justify-between">
-      <p className={"text-2xl font-semibold text-gray-800"}>Response</p>
+      <p className={"text-2xl font-semibold text-slate-800"}>Response</p>
       <div>
-        {isSubmitting && <p className="text-sm text-gray-600">Loading...</p>}
+        {isSubmitting && <p className="text-sm text-slate-600">Loading...</p>}
         {response.value !== null && (
           <div className="flex gap-4">
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-slate-600">
               Status:{" "}
               <span className={valueClassName}>
                 {response.value.status} {response.value.statusText}
               </span>
             </p>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-slate-600">
               Time:{" "}
               <span className={valueClassName}>{response.value.time} ms</span>
             </p>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-slate-600">
               Content-Length:{" "}
               <span className={valueClassName}>
                 {response.value.size.value} {response.value.size.unit}

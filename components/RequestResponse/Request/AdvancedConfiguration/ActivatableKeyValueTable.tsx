@@ -41,7 +41,7 @@ export default function ActivatableKeyValueTable({
       {data.length > 0 ? (
         <table className="table-auto text-left mb-2 max-h-[400px] overflow-auto">
           <thead>
-            <tr className="text-gray-700 text-sm font-semibold">
+            <tr className="text-slate-700 text-sm font-semibold">
               <th className={`${tableHeadersTwClasses} w-1/12 text-right`}>
                 <Checkbox
                   onCheckedChange={(checked: boolean) => {
@@ -58,7 +58,7 @@ export default function ActivatableKeyValueTable({
           <tbody>
             {data.map((record, index) => {
               return (
-                <tr key={index} className="hover:bg-gray-50">
+                <tr key={index} className="hover:bg-slate-50">
                   <td className={`${tableRowsTwClasses} text-right`}>
                     <Checkbox
                       checked={record.active}

@@ -18,8 +18,8 @@ const httpMethodColors: {
   PUT: "text-yellow-600",
   PATCH: "text-yellow-600",
   DELETE: "text-red-600",
-  OPTIONS: "text-gray-600",
-  HEAD: "text-gray-600",
+  OPTIONS: "text-slate-600",
+  HEAD: "text-slate-600",
 };
 
 export default function RequestHttpMethodSelect() {

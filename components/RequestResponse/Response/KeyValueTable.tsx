@@ -14,7 +14,7 @@ export default function KeyValueTable({
       {data.length > 0 ? (
         <table className="table-auto text-left mb-2">
           <thead>
-            <tr className="text-gray-700 text-sm font-semibold">
+            <tr className="text-slate-700 text-sm font-semibold">
               <th className={`${tableHeadersTwClasses} w-3/12`}>Key</th>
               <th className={`${tableHeadersTwClasses} w-9/12`}>Value</th>
             </tr>
@@ -22,7 +22,7 @@ export default function KeyValueTable({
           <tbody>
             {data.map((row, index) => {
               return (
-                <tr key={index} className="hover:bg-gray-50 text-sm">
+                <tr key={index} className="hover:bg-slate-50 text-sm">
                   <td className={tableRowsTwClasses}>{row.key}</td>
                   <td className={tableRowsTwClasses}>{row.value}</td>
                 </tr>
