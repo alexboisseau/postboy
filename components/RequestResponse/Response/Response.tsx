@@ -18,6 +18,10 @@ export default function Response() {
       <TabsViews
         tabs={[
           {
+            title: "Body",
+            view: response.value !== null && <Body />,
+          },
+          {
             title: "Headers",
             view: response.value !== null && (
               <KeyValueTable data={response.value.headers} />
@@ -28,10 +32,6 @@ export default function Response() {
             view: response.value !== null && (
               <CookiesTable cookies={response.value.cookies} />
             ),
-          },
-          {
-            title: "Body",
-            view: response.value !== null && <Body />,
           },
         ]}
       />
