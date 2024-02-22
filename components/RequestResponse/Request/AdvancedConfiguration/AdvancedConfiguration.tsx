@@ -1,25 +1,25 @@
 import QueryParametersConfiguration from "./QueryParametersConfiguration";
 import HeadersConfiguration from "./HeadersConfiguration";
 import BodyConfiguration from "./BodyConfiguration/BodyConfiguration";
-import TabsViews from "@/components/shared/TabsViews";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function AdvancedConfiguration() {
   return (
-    <TabsViews
-      tabs={[
-        {
-          title: "Query Parameters",
-          view: <QueryParametersConfiguration />,
-        },
-        {
-          title: "Headers",
-          view: <HeadersConfiguration />,
-        },
-        {
-          title: "Body",
-          view: <BodyConfiguration />,
-        },
-      ]}
-    />
+    <Tabs defaultValue="query-parameters">
+      <TabsList>
+        <TabsTrigger value="query-parameters">Query Parameters</TabsTrigger>
+        <TabsTrigger value="headers">Headers</TabsTrigger>
+        <TabsTrigger value="body">Body</TabsTrigger>
+      </TabsList>
+      <TabsContent value="query-parameters">
+        <QueryParametersConfiguration />
+      </TabsContent>
+      <TabsContent value="headers">
+        <HeadersConfiguration />
+      </TabsContent>
+      <TabsContent value="body">
+        <BodyConfiguration />
+      </TabsContent>
+    </Tabs>
   );
 }

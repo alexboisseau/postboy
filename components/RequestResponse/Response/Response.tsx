@@ -5,7 +5,7 @@ import ResponseError from "./ResponseError";
 import KeyValueTable from "./KeyValueTable";
 import CookiesTable from "./CookiesTable";
 import Body from "./Body";
-import TabsViews from "@/components/shared/TabsViews";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function Response() {
   const {
@@ -15,26 +15,26 @@ export default function Response() {
   return (
     <div className="flex flex-col gap-1">
       <ResponseHeader />
-      <TabsViews
-        tabs={[
-          {
-            title: "Body",
-            view: response.value !== null && <Body />,
-          },
-          {
-            title: "Headers",
-            view: response.value !== null && (
-              <KeyValueTable data={response.value.headers} />
-            ),
-          },
-          {
-            title: "Cookies",
-            view: response.value !== null && (
-              <CookiesTable cookies={response.value.cookies} />
-            ),
-          },
-        ]}
-      />
+      <Tabs defaultValue="body">
+        <TabsList>
+          <TabsTrigger value="body">Body</TabsTrigger>
+          <TabsTrigger value="headers">Headers</TabsTrigger>
+          <TabsTrigger value="cookies">Cookies</TabsTrigger>
+        </TabsList>
+        <TabsContent value="body">
+          {response.value !== null && <Body />}
+        </TabsContent>
+        <TabsContent value="headers">
+          {response.value !== null && (
+            <KeyValueTable data={response.value.headers} />
+          )}
+        </TabsContent>
+        <TabsContent value="headers">
+          {response.value !== null && (
+            <CookiesTable cookies={response.value.cookies} />
+          )}
+        </TabsContent>
+      </Tabs>
       {response.error && <ResponseError />}
     </div>
   );
