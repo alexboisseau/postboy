@@ -14,6 +14,10 @@ export type RequestFormErrors = {
 
 export type RequestFormAuthorization = {
   type: AuthorizationType;
+  basic: {
+    username: string;
+    password: string;
+  };
 };
 
 export type RequestFormBody = {
@@ -62,6 +66,8 @@ export enum RequestResponseActionTypes {
   REQUEST_UPDATE_HEADER = "REQUEST_UPDATE_HEADER",
   REQUEST_CHECK_ALL_HEADERS = "REQUEST_CHECK_ALL_HEADERS",
   REQUEST_UPDATE_AUTHORIZATION_TYPE = "REQUEST_UPDATE_AUTHORIZATION_TYPE",
+  REQUEST_UPDATE_AUTHORIZATION_BASIC_USERNAME = "REQUEST_UPDATE_AUTHORIZATION_BASIC_USERNAME",
+  REQUEST_UPDATE_AUTHORIZATION_BASIC_PASSWORD = "REQUEST_UPDATE_AUTHORIZATION_BASIC_PASSWORD",
   REQUEST_UPDATE_BODY_CONTENT_TYPE = "REQUEST_UPDATE_BODY_CONTENT_TYPE",
   REQUEST_UPDATE_BODY_RAW_LANGUAGE = "REQUEST_UPDATE_BODY_RAW_LANGUAGE",
   REQUEST_UPDATE_BODY_RAW_CONTENT = "REQUEST_UPDATE_BODY_RAW_CONTENT",
@@ -134,6 +140,16 @@ type RequestUpdateAuthorizationType = {
   payload: AuthorizationType;
 };
 
+type RequestUpdateAuthorizationBasicUsername = {
+  type: RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_BASIC_USERNAME;
+  payload: string;
+};
+
+type RequestUpdateAuthorizationBasicPassword = {
+  type: RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_BASIC_PASSWORD;
+  payload: string;
+};
+
 type RequestUpdateBodyContentType = {
   type: RequestResponseActionTypes.REQUEST_UPDATE_BODY_CONTENT_TYPE;
   payload: ContentType;
@@ -202,6 +218,8 @@ export type RequestResponseAction =
   | RequestUpdateHeaderAction
   | RequestCheckAllHeadersAction
   | RequestUpdateAuthorizationType
+  | RequestUpdateAuthorizationBasicUsername
+  | RequestUpdateAuthorizationBasicPassword
   | RequestUpdateBodyContentType
   | RequestUpdateBodyRawLanguage
   | RequestUpdateBodyRawContent

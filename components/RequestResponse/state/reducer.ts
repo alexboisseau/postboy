@@ -82,6 +82,10 @@ export const initialRequestResponse: RequestResponse = {
       headers: [],
       authorization: {
         type: "no-auth",
+        basic: {
+          username: "",
+          password: "",
+        },
       },
       body: {
         contentType: "none",
@@ -330,6 +334,44 @@ export function requestResponseReducer(
             authorization: {
               ...state.request.fields.authorization,
               type: action.payload,
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_BASIC_USERNAME: {
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            authorization: {
+              ...state.request.fields.authorization,
+              basic: {
+                ...state.request.fields.authorization.basic,
+                username: action.payload,
+              },
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_BASIC_PASSWORD: {
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            authorization: {
+              ...state.request.fields.authorization,
+              basic: {
+                ...state.request.fields.authorization.basic,
+                password: action.payload,
+              },
             },
           },
         },
