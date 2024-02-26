@@ -9,7 +9,7 @@ import { ThemeProvider } from "@/components/shared/ThemeProvider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Postman Like",
+  title: "Postboy",
   description: "An easy way to make HTTP requests.",
 };
 

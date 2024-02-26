@@ -43,7 +43,7 @@ export default function Header() {
   return (
     <header className="py-3 px-5 flex justify-between items-center bg-white dark:bg-zinc-900">
       <div>
-        <h1 className="text-2xl font-bold">Postman Like</h1>
+        <h1 className="text-2xl font-bold">Postboy</h1>
         <p className="text-xs">An easy way to make HTTP requests.</p>
       </div>
       <ModeToggle />
