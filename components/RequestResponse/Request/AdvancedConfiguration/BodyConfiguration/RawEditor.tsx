@@ -2,12 +2,13 @@ import { useContext } from "react";
 import { json } from "@codemirror/lang-json";
 import { xml } from "@codemirror/lang-xml";
 import ReactCodeMirror from "@uiw/react-codemirror";
-import { githubLight } from "@uiw/codemirror-theme-github";
+import { githubDark, githubLight } from "@uiw/codemirror-theme-github";
 import {
   RequestResponseActionTypes,
   SupportedRawLanguages,
 } from "@/components/RequestResponse/state/actions";
 import { RequestResponseContext } from "@/components/RequestResponse/state/context";
+import { useTheme } from "next-themes";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const languageMap: Record<SupportedRawLanguages, () => any> = {
@@ -16,6 +17,7 @@ const languageMap: Record<SupportedRawLanguages, () => any> = {
 };
 
 export default function RawEditor() {
+  const { theme } = useTheme();
   const {
     requestResponse: {
       request: {
@@ -40,7 +42,7 @@ export default function RawEditor() {
       height="250px"
       onChange={handleChange}
       extensions={[languageMap[raw.language]()]}
-      theme={githubLight}
+      theme={theme === "dark" ? githubDark : githubLight}
     />
   );
 }

@@ -55,7 +55,9 @@ export default function FormUrlEncoded() {
         onRemoveRecord={handleRemoveRecord}
         onUpdateRecord={handleUpdateRecord}
       />
-      <Button onClick={handleAddRecord}>Add Record</Button>
+      <Button variant="secondary" onClick={handleAddRecord}>
+        Add Record
+      </Button>
     </div>
   );
 }

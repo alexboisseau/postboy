@@ -29,22 +29,22 @@ export default function ResponseHeader() {
 
   return (
     <div className="flex justify-between">
-      <p className={"text-2xl font-semibold text-slate-800"}>Response</p>
+      <p className={"text-2xl font-semibold"}>Response</p>
       <div>
-        {isSubmitting && <p className="text-sm text-slate-600">Loading...</p>}
+        {isSubmitting && <p className="text-sm">Loading...</p>}
         {response.value !== null && (
           <div className="flex gap-4">
-            <p className="text-sm text-slate-600">
+            <p className="text-sm ">
               Status:{" "}
               <span className={valueClassName}>
                 {response.value.status} {response.value.statusText}
               </span>
             </p>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm ">
               Time:{" "}
               <span className={valueClassName}>{response.value.time} ms</span>
             </p>
-            <p className="text-sm text-slate-600">
+            <p className="text-sm ">
               Content-Length:{" "}
               <span className={valueClassName}>
                 {response.value.size.value} {response.value.size.unit}

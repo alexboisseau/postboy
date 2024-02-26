@@ -9,7 +9,7 @@ export default function CookiesTable({ cookies }: { cookies: HttpCookie[] }) {
       {cookies.length > 0 ? (
         <table className="table-fixed text-left mb-2 w-full">
           <thead>
-            <tr className="text-slate-700 text-sm font-semibold">
+            <tr className="text-sm font-semibold">
               <th className={`${tableHeadersTwClasses}`}>Key</th>
               <th className={`${tableHeadersTwClasses}`}>Value</th>
               <th className={`${tableHeadersTwClasses}`}>Domain</th>
@@ -22,7 +22,7 @@ export default function CookiesTable({ cookies }: { cookies: HttpCookie[] }) {
           <tbody>
             {cookies.map((cookie, index) => {
               return (
-                <tr key={index} className="hover:bg-slate-50 text-sm">
+                <tr key={index} className="text- sm">
                   <td className={tableRowsTwClasses}>{cookie.key}</td>
                   <td className={tableRowsTwClasses}>{cookie.value}</td>
                   <td className={tableRowsTwClasses}>{cookie.domain}</td>

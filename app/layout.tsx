@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { Separator } from "@/components/ui/separator";
 import Header from "@/components/shared/Header";
 import "./globals.css";
+import { ThemeProvider } from "@/components/shared/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,11 +21,18 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.className} flex flex-col min-h-screen bg-slate-50`}
+        className={`${inter.className} bg-zinc-50 dark:bg-zinc-950 flex flex-col min-h-screen`}
       >
-        <Header />
-        <Separator />
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Header />
+          <Separator />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

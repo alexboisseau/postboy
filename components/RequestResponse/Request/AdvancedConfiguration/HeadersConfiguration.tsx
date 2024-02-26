@@ -56,7 +56,7 @@ export default function HeadersConfiguration() {
         onUpdateRecord={handleUpdateParam}
         onRemoveRecord={handleRemoveParam}
       />
-      <Button onClick={handleNewParam} className="w-fit">
+      <Button onClick={handleNewParam} className="w-fit" variant={"secondary"}>
         Add Header
       </Button>
     </div>

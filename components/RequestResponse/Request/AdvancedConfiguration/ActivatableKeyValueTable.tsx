@@ -34,15 +34,15 @@ export default function ActivatableKeyValueTable({
   const tableHeadersTwClasses = "border p-2";
   const tableRowsTwClasses = "border p-2";
   const tableInputTwClasses =
-    "p-0 h-auto border-none focus:bg-white focus-visible:ring-0";
+    "p-0 h-auto bg-transparent border-none focus-visible:ring-0";
 
   return (
     <div className="flex flex-col">
       {data.length > 0 ? (
         <table className="table-auto text-left mb-2 max-h-[400px] overflow-auto">
           <thead>
-            <tr className="text-slate-700 text-sm font-semibold">
-              <th className={`${tableHeadersTwClasses} w-1/12 text-right`}>
+            <tr className="text-sm font-semibold">
+              <th className={`${tableHeadersTwClasses} w-[3%] text-center`}>
                 <Checkbox
                   onCheckedChange={(checked: boolean) => {
                     onCheckAll(checked);
@@ -58,8 +58,8 @@ export default function ActivatableKeyValueTable({
           <tbody>
             {data.map((record, index) => {
               return (
-                <tr key={index} className="hover:bg-slate-50">
-                  <td className={`${tableRowsTwClasses} text-right`}>
+                <tr key={index}>
+                  <td className={`${tableRowsTwClasses} text-center`}>
                     <Checkbox
                       checked={record.active}
                       onCheckedChange={(checked: boolean) => {

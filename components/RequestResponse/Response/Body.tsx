@@ -1,12 +1,14 @@
 import ReactCodeMirror from "@uiw/react-codemirror";
 import { useContext, useEffect, useState } from "react";
 import { RequestResponseContext } from "../state/context";
-import { githubLight } from "@uiw/codemirror-theme-github";
+import { githubDark, githubLight } from "@uiw/codemirror-theme-github";
 
 import { getLanguageFromContentType } from "@/libs/code-mirror/get-language-from-content-type";
 import { formatContent } from "@/libs/prettier/formatContent";
+import { useTheme } from "next-themes";
 
 export default function Body() {
+  const { theme } = useTheme();
   const {
     requestResponse: {
       response: { value },
@@ -29,7 +31,7 @@ export default function Body() {
       value={formattedContent ?? value?.body.value}
       height="400px"
       extensions={language ? [language()] : []}
-      theme={githubLight}
+      theme={theme === "dark" ? githubDark : githubLight}
     />
   );
 }

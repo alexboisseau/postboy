@@ -56,7 +56,7 @@ export default function QueryParametersConfiguration() {
         onUpdateRecord={handleUpdateParam}
         onRemoveRecord={handleRemoveParam}
       />
-      <Button onClick={handleNewParam} className="w-fit">
+      <Button onClick={handleNewParam} className="w-fit" variant={"secondary"}>
         Add Param
       </Button>
     </div>
