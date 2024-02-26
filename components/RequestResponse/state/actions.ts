@@ -3,12 +3,17 @@ import { HttpMethod } from "@/core/types/http-method";
 import { Header, QueryParameter } from "@/core/types/http-request";
 import { HttpResponse } from "@/core/types/http-response";
 
+export type AuthorizationType = "no-auth" | "basic" | "bearer" | "api-key";
 export type ContentType = "none" | "x-www-form-urlencoded" | "raw";
 export type SupportedRawLanguages = "json" | "xml";
 
 export type RequestFormErrors = {
   httpMethod: string | null;
   url: string | null;
+};
+
+export type RequestFormAuthorization = {
+  type: AuthorizationType;
 };
 
 export type RequestFormBody = {
@@ -25,6 +30,7 @@ export type RequestFormFields = {
   url: string;
   queryParameters: QueryParameter[];
   headers: Header[];
+  authorization: RequestFormAuthorization;
   body: RequestFormBody;
 };
 
@@ -55,6 +61,7 @@ export enum RequestResponseActionTypes {
   REQUEST_REMOVE_HEADER = "REQUEST_REMOVE_HEADER",
   REQUEST_UPDATE_HEADER = "REQUEST_UPDATE_HEADER",
   REQUEST_CHECK_ALL_HEADERS = "REQUEST_CHECK_ALL_HEADERS",
+  REQUEST_UPDATE_AUTHORIZATION_TYPE = "REQUEST_UPDATE_AUTHORIZATION_TYPE",
   REQUEST_UPDATE_BODY_CONTENT_TYPE = "REQUEST_UPDATE_BODY_CONTENT_TYPE",
   REQUEST_UPDATE_BODY_RAW_LANGUAGE = "REQUEST_UPDATE_BODY_RAW_LANGUAGE",
   REQUEST_UPDATE_BODY_RAW_CONTENT = "REQUEST_UPDATE_BODY_RAW_CONTENT",
@@ -120,6 +127,11 @@ type RequestUpdateHeaderAction = {
 type RequestCheckAllHeadersAction = {
   type: RequestResponseActionTypes.REQUEST_CHECK_ALL_HEADERS;
   payload: boolean;
+};
+
+type RequestUpdateAuthorizationType = {
+  type: RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_TYPE;
+  payload: AuthorizationType;
 };
 
 type RequestUpdateBodyContentType = {
@@ -189,6 +201,7 @@ export type RequestResponseAction =
   | RequestRemoveHeaderAction
   | RequestUpdateHeaderAction
   | RequestCheckAllHeadersAction
+  | RequestUpdateAuthorizationType
   | RequestUpdateBodyContentType
   | RequestUpdateBodyRawLanguage
   | RequestUpdateBodyRawContent
