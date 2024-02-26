@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/select";
 import { useContext } from "react";
 import BasicAuthorization from "./AuthorizationTypes/Basic";
+import BearerTokenAuthorization from "./AuthorizationTypes/BearerToken";
 
 function AuthorizationTypeSelector() {
   const {
@@ -43,7 +44,7 @@ function AuthorizationTypeSelector() {
           <SelectContent>
             <SelectItem value="no-auth">No auth</SelectItem>
             <SelectItem value="basic">Basic</SelectItem>
-            <SelectItem value="bearer">Bearer</SelectItem>
+            <SelectItem value="bearer-token">Bearer</SelectItem>
             <SelectItem value="api-key">API Key</SelectItem>
           </SelectContent>
         </Select>
@@ -75,6 +76,7 @@ export default function AuthorizationConfiguration() {
       <div className="w-4/6 flex items-center justify-center">
         {type === "no-auth" && <p>No authorization</p>}
         {type === "basic" && <BasicAuthorization />}
+        {type === "bearer-token" && <BearerTokenAuthorization />}
       </div>
     </div>
   );

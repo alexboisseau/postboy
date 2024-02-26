@@ -86,6 +86,9 @@ export const initialRequestResponse: RequestResponse = {
           username: "",
           password: "",
         },
+        bearerToken: {
+          token: "",
+        },
       },
       body: {
         contentType: "none",
@@ -371,6 +374,24 @@ export function requestResponseReducer(
               basic: {
                 ...state.request.fields.authorization.basic,
                 password: action.payload,
+              },
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_BEARER_TOKEN: {
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            authorization: {
+              ...state.request.fields.authorization,
+              bearerToken: {
+                token: action.payload,
               },
             },
           },

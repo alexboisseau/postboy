@@ -3,7 +3,11 @@ import { HttpMethod } from "@/core/types/http-method";
 import { Header, QueryParameter } from "@/core/types/http-request";
 import { HttpResponse } from "@/core/types/http-response";
 
-export type AuthorizationType = "no-auth" | "basic" | "bearer" | "api-key";
+export type AuthorizationType =
+  | "no-auth"
+  | "basic"
+  | "bearer-token"
+  | "api-key";
 export type ContentType = "none" | "x-www-form-urlencoded" | "raw";
 export type SupportedRawLanguages = "json" | "xml";
 
@@ -17,6 +21,9 @@ export type RequestFormAuthorization = {
   basic: {
     username: string;
     password: string;
+  };
+  bearerToken: {
+    token: string;
   };
 };
 
@@ -68,6 +75,7 @@ export enum RequestResponseActionTypes {
   REQUEST_UPDATE_AUTHORIZATION_TYPE = "REQUEST_UPDATE_AUTHORIZATION_TYPE",
   REQUEST_UPDATE_AUTHORIZATION_BASIC_USERNAME = "REQUEST_UPDATE_AUTHORIZATION_BASIC_USERNAME",
   REQUEST_UPDATE_AUTHORIZATION_BASIC_PASSWORD = "REQUEST_UPDATE_AUTHORIZATION_BASIC_PASSWORD",
+  REQUEST_UPDATE_AUTHORIZATION_BEARER_TOKEN = "REQUEST_UPDATE_AUTHORIZATION_BEARER_TOKEN",
   REQUEST_UPDATE_BODY_CONTENT_TYPE = "REQUEST_UPDATE_BODY_CONTENT_TYPE",
   REQUEST_UPDATE_BODY_RAW_LANGUAGE = "REQUEST_UPDATE_BODY_RAW_LANGUAGE",
   REQUEST_UPDATE_BODY_RAW_CONTENT = "REQUEST_UPDATE_BODY_RAW_CONTENT",
@@ -150,6 +158,11 @@ type RequestUpdateAuthorizationBasicPassword = {
   payload: string;
 };
 
+type RequestUpdateAuthorizationBearerToken = {
+  type: RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_BEARER_TOKEN;
+  payload: string;
+};
+
 type RequestUpdateBodyContentType = {
   type: RequestResponseActionTypes.REQUEST_UPDATE_BODY_CONTENT_TYPE;
   payload: ContentType;
@@ -220,6 +233,7 @@ export type RequestResponseAction =
   | RequestUpdateAuthorizationType
   | RequestUpdateAuthorizationBasicUsername
   | RequestUpdateAuthorizationBasicPassword
+  | RequestUpdateAuthorizationBearerToken
   | RequestUpdateBodyContentType
   | RequestUpdateBodyRawLanguage
   | RequestUpdateBodyRawContent
