@@ -80,6 +80,9 @@ export const initialRequestResponse: RequestResponse = {
       url: "",
       queryParameters: [],
       headers: [],
+      authorization: {
+        type: "no-auth",
+      },
       body: {
         contentType: "none",
         raw: {
@@ -312,6 +315,22 @@ export function requestResponseReducer(
           fields: {
             ...state.request.fields,
             headers: updatedHeaders,
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_TYPE: {
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            authorization: {
+              ...state.request.fields.authorization,
+              type: action.payload,
+            },
           },
         },
       };
