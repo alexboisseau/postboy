@@ -328,6 +328,28 @@ export function requestResponseReducer(
     }
 
     case RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_TYPE: {
+      const updatedHeaders = state.request.fields.headers.filter(
+        (header) => header.key !== "Authorization"
+      );
+
+      if (action.payload !== "no-auth") {
+        if (action.payload === "basic") {
+          updatedHeaders.push({
+            key: "Authorization",
+            value: `Basic ${btoa(
+              `${state.request.fields.authorization.basic.username}:${state.request.fields.authorization.basic.password}`
+            )}`,
+            active: true,
+          });
+        } else if (action.payload === "bearer-token") {
+          updatedHeaders.push({
+            key: "Authorization",
+            value: `Bearer ${state.request.fields.authorization.bearerToken.token}`,
+            active: true,
+          });
+        }
+      }
+
       return {
         ...state,
         request: {
@@ -338,12 +360,25 @@ export function requestResponseReducer(
               ...state.request.fields.authorization,
               type: action.payload,
             },
+            headers: [...updatedHeaders],
           },
         },
       };
     }
 
     case RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_BASIC_USERNAME: {
+      const updatedHeaders = state.request.fields.headers.filter(
+        (header) => header.key !== "Authorization"
+      );
+
+      updatedHeaders.push({
+        key: "Authorization",
+        value: `Basic ${btoa(
+          `${action.payload}:${state.request.fields.authorization.basic.password}`
+        )}`,
+        active: true,
+      });
+
       return {
         ...state,
         request: {
@@ -363,12 +398,25 @@ export function requestResponseReducer(
     }
 
     case RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_BASIC_PASSWORD: {
+      const updatedHeaders = state.request.fields.headers.filter(
+        (header) => header.key !== "Authorization"
+      );
+
+      updatedHeaders.push({
+        key: "Authorization",
+        value: `Basic ${btoa(
+          `${state.request.fields.authorization.basic.username}:${action.payload}`
+        )}`,
+        active: true,
+      });
+
       return {
         ...state,
         request: {
           ...state.request,
           fields: {
             ...state.request.fields,
+            headers: [...updatedHeaders],
             authorization: {
               ...state.request.fields.authorization,
               basic: {
@@ -382,12 +430,23 @@ export function requestResponseReducer(
     }
 
     case RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_BEARER_TOKEN: {
+      const updatedHeaders = state.request.fields.headers.filter(
+        (header) => header.key !== "Authorization"
+      );
+
+      updatedHeaders.push({
+        key: "Authorization",
+        value: `Bearer ${action.payload}`,
+        active: true,
+      });
+
       return {
         ...state,
         request: {
           ...state.request,
           fields: {
             ...state.request.fields,
+            headers: [...updatedHeaders],
             authorization: {
               ...state.request.fields.authorization,
               bearerToken: {

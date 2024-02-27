@@ -5,7 +5,18 @@ import { Label } from "@/components/ui/label";
 import { useContext } from "react";
 
 export default function BearerTokenAuthorization() {
-  const { dispatchRequestResponseAction } = useContext(RequestResponseContext);
+  const {
+    requestResponse: {
+      request: {
+        fields: {
+          authorization: {
+            bearerToken: { token },
+          },
+        },
+      },
+    },
+    dispatchRequestResponseAction,
+  } = useContext(RequestResponseContext);
 
   const handleChange = (value: string) => {
     dispatchRequestResponseAction({
@@ -23,6 +34,7 @@ export default function BearerTokenAuthorization() {
           onChange={(e) => {
             handleChange(e.currentTarget.value);
           }}
+          value={token}
           id="authorization-bearer-token"
         />
       </div>
