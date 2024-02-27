@@ -82,6 +82,10 @@ export const initialRequestResponse: RequestResponse = {
       headers: [],
       authorization: {
         type: "no-auth",
+        apiKey: {
+          key: "",
+          value: "",
+        },
         basic: {
           username: "",
           password: "",
@@ -451,6 +455,70 @@ export function requestResponseReducer(
               ...state.request.fields.authorization,
               bearerToken: {
                 token: action.payload,
+              },
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_API_KEY_KEY: {
+      const lastKeyValue = state.request.fields.authorization.apiKey.key;
+      const updatedHeaders = state.request.fields.headers.filter(
+        (header) =>
+          header.key !== "Authorization" && header.key !== lastKeyValue
+      );
+
+      updatedHeaders.push({
+        key: action.payload,
+        value: state.request.fields.authorization.apiKey.value,
+        active: true,
+      });
+
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            headers: [...updatedHeaders],
+            authorization: {
+              ...state.request.fields.authorization,
+              apiKey: {
+                ...state.request.fields.authorization.apiKey,
+                key: action.payload,
+              },
+            },
+          },
+        },
+      };
+    }
+
+    case RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_API_KEY_VALUE: {
+      const lastKeyValue = state.request.fields.authorization.apiKey.key;
+      const updatedHeaders = state.request.fields.headers.filter(
+        (header) =>
+          header.key !== "Authorization" && header.key !== lastKeyValue
+      );
+
+      updatedHeaders.push({
+        key: state.request.fields.authorization.apiKey.key,
+        value: action.payload,
+        active: true,
+      });
+
+      return {
+        ...state,
+        request: {
+          ...state.request,
+          fields: {
+            ...state.request.fields,
+            headers: [...updatedHeaders],
+            authorization: {
+              ...state.request.fields.authorization,
+              apiKey: {
+                ...state.request.fields.authorization.apiKey,
+                value: action.payload,
               },
             },
           },

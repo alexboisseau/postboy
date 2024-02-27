@@ -18,6 +18,10 @@ export type RequestFormErrors = {
 
 export type RequestFormAuthorization = {
   type: AuthorizationType;
+  apiKey: {
+    key: string;
+    value: string;
+  };
   basic: {
     username: string;
     password: string;
@@ -76,6 +80,8 @@ export enum RequestResponseActionTypes {
   REQUEST_UPDATE_AUTHORIZATION_BASIC_USERNAME = "REQUEST_UPDATE_AUTHORIZATION_BASIC_USERNAME",
   REQUEST_UPDATE_AUTHORIZATION_BASIC_PASSWORD = "REQUEST_UPDATE_AUTHORIZATION_BASIC_PASSWORD",
   REQUEST_UPDATE_AUTHORIZATION_BEARER_TOKEN = "REQUEST_UPDATE_AUTHORIZATION_BEARER_TOKEN",
+  REQUEST_UPDATE_AUTHORIZATION_API_KEY_KEY = "REQUEST_UPDATE_AUTHORIZATION_API_KEY_KEY",
+  REQUEST_UPDATE_AUTHORIZATION_API_KEY_VALUE = "REQUEST_UPDATE_AUTHORIZATION_API_KEY_VALUE",
   REQUEST_UPDATE_BODY_CONTENT_TYPE = "REQUEST_UPDATE_BODY_CONTENT_TYPE",
   REQUEST_UPDATE_BODY_RAW_LANGUAGE = "REQUEST_UPDATE_BODY_RAW_LANGUAGE",
   REQUEST_UPDATE_BODY_RAW_CONTENT = "REQUEST_UPDATE_BODY_RAW_CONTENT",
@@ -163,6 +169,16 @@ type RequestUpdateAuthorizationBearerToken = {
   payload: string;
 };
 
+type RequestUpdateAuthorizationApiKeyKey = {
+  type: RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_API_KEY_KEY;
+  payload: string;
+};
+
+type RequestUpdateAuthorizationApiKeyValue = {
+  type: RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_API_KEY_VALUE;
+  payload: string;
+};
+
 type RequestUpdateBodyContentType = {
   type: RequestResponseActionTypes.REQUEST_UPDATE_BODY_CONTENT_TYPE;
   payload: ContentType;
@@ -234,6 +250,8 @@ export type RequestResponseAction =
   | RequestUpdateAuthorizationBasicUsername
   | RequestUpdateAuthorizationBasicPassword
   | RequestUpdateAuthorizationBearerToken
+  | RequestUpdateAuthorizationApiKeyKey
+  | RequestUpdateAuthorizationApiKeyValue
   | RequestUpdateBodyContentType
   | RequestUpdateBodyRawLanguage
   | RequestUpdateBodyRawContent

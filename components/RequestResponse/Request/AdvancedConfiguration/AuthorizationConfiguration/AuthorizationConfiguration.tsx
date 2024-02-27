@@ -13,6 +13,7 @@ import {
 import { useContext } from "react";
 import BasicAuthorization from "./AuthorizationTypes/Basic";
 import BearerTokenAuthorization from "./AuthorizationTypes/BearerToken";
+import ApiKeyAuthorization from "./AuthorizationTypes/ApiKey";
 
 function AuthorizationTypeSelector() {
   const {
@@ -75,6 +76,7 @@ export default function AuthorizationConfiguration() {
       </div>
       <div className="w-4/6 flex items-center justify-center">
         {type === "no-auth" && <p>No authorization</p>}
+        {type === "api-key" && <ApiKeyAuthorization />}
         {type === "basic" && <BasicAuthorization />}
         {type === "bearer-token" && <BearerTokenAuthorization />}
       </div>
