@@ -1,4 +1,4 @@
-import { sendHttpRequest } from "@/src/app/actions/send-http-request";
+import { sendHttpRequest } from "@/src/server-actions/send-http-request";
 import { RequestForm, RequestResponseActionTypes } from "./actions";
 import { RequestResponseContext } from "./context";
 import {
