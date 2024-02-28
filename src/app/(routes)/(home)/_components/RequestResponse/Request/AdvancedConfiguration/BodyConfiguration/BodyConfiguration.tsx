@@ -9,12 +9,12 @@ import {
 } from "@components/ui/select";
 import RawEditor from "./RawEditor";
 import FormUrlEncoded from "./FormUrlEncoded";
-import { RequestResponseContext } from "@components/RequestResponse/state/context";
+import { RequestResponseContext } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/context";
 import {
   ContentType,
   RequestResponseActionTypes,
   SupportedRawLanguages,
-} from "@components/RequestResponse/state/actions";
+} from "@/src/app/(routes)/(home)/_components/RequestResponse/state/actions";
 
 function SelectContentType({
   contentType,

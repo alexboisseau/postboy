@@ -4,7 +4,7 @@ import AdvancedConfiguration from "./AdvancedConfiguration/AdvancedConfiguration
 import RequestHttpMethodSelect from "./RequestHttpMethodSelect";
 import RequestUrlInput from "./RequestUrlInput";
 import { RequestResponseContext } from "../state/context";
-import { Button } from "../../ui/button";
+import { Button } from "../../../../../../components/ui/button";
 
 export default function Request() {
   const {

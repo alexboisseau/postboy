@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import ActivatableKeyValueTable from "../ActivatableKeyValueTable";
-import { RequestResponseContext } from "@components/RequestResponse/state/context";
-import { RequestResponseActionTypes } from "@components/RequestResponse/state/actions";
+import { RequestResponseContext } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/context";
+import { RequestResponseActionTypes } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/actions";
 import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import { Button } from "@components/ui/button";
 

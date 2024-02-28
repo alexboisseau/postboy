@@ -1,4 +1,4 @@
-import RequestResponse from "@components/RequestResponse/RequestResponse";
+import RequestResponse from "./_components/RequestResponse/RequestResponse";
 
 export default function Home() {
   return (

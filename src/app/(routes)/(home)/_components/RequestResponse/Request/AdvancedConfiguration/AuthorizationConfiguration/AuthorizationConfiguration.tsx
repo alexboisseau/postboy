@@ -1,8 +1,8 @@
 import {
   AuthorizationType,
   RequestResponseActionTypes,
-} from "@components/RequestResponse/state/actions";
-import { RequestResponseContext } from "@components/RequestResponse/state/context";
+} from "@/src/app/(routes)/(home)/_components/RequestResponse/state/actions";
+import { RequestResponseContext } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/context";
 import {
   Select,
   SelectContent,

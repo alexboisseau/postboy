@@ -1,5 +1,5 @@
-import { RequestResponseActionTypes } from "@components/RequestResponse/state/actions";
-import { RequestResponseContext } from "@components/RequestResponse/state/context";
+import { RequestResponseActionTypes } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/actions";
+import { RequestResponseContext } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/context";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import { useContext } from "react";

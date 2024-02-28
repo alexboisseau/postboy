@@ -8,8 +8,8 @@ import { xmlLinter } from "@libs/code-mirror/xml-linter";
 import {
   RequestResponseActionTypes,
   SupportedRawLanguages,
-} from "@components/RequestResponse/state/actions";
-import { RequestResponseContext } from "@components/RequestResponse/state/context";
+} from "@/src/app/(routes)/(home)/_components/RequestResponse/state/actions";
+import { RequestResponseContext } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/context";
 import { useTheme } from "next-themes";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
