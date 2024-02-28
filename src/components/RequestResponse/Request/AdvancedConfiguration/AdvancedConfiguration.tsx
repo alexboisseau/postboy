@@ -1,12 +1,7 @@
 import QueryParametersConfiguration from "./QueryParametersConfiguration";
 import HeadersConfiguration from "./HeadersConfiguration";
 import BodyConfiguration from "./BodyConfiguration/BodyConfiguration";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/src/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import AuthorizationConfiguration from "./AuthorizationConfiguration/AuthorizationConfiguration";
 import { useContext } from "react";
 import { RequestResponseContext } from "../../state/context";

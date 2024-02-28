@@ -1,15 +1,15 @@
 import {
   AuthorizationType,
   RequestResponseActionTypes,
-} from "@/src/components/RequestResponse/state/actions";
-import { RequestResponseContext } from "@/src/components/RequestResponse/state/context";
+} from "@components/RequestResponse/state/actions";
+import { RequestResponseContext } from "@components/RequestResponse/state/context";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/src/components/ui/select";
+} from "@components/ui/select";
 import { useContext } from "react";
 import BasicAuthorization from "./AuthorizationTypes/Basic";
 import BearerTokenAuthorization from "./AuthorizationTypes/BearerToken";

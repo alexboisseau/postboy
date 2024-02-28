@@ -1,20 +1,20 @@
 import { useContext } from "react";
-import { RadioGroup, RadioGroupItem } from "@/src/components/ui/radio-group";
+import { RadioGroup, RadioGroupItem } from "@components/ui/radio-group";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/src/components/ui/select";
+} from "@components/ui/select";
 import RawEditor from "./RawEditor";
 import FormUrlEncoded from "./FormUrlEncoded";
-import { RequestResponseContext } from "@/src/components/RequestResponse/state/context";
+import { RequestResponseContext } from "@components/RequestResponse/state/context";
 import {
   ContentType,
   RequestResponseActionTypes,
   SupportedRawLanguages,
-} from "@/src/components/RequestResponse/state/actions";
+} from "@components/RequestResponse/state/actions";
 
 function SelectContentType({
   contentType,

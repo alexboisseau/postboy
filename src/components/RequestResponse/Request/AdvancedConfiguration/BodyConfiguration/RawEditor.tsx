@@ -4,12 +4,12 @@ import { xml } from "@codemirror/lang-xml";
 import ReactCodeMirror from "@uiw/react-codemirror";
 import { githubDark, githubLight } from "@uiw/codemirror-theme-github";
 import { linter, lintGutter, LintSource } from "@codemirror/lint";
-import { xmlLinter } from "@/src/libs/code-mirror/xml-linter";
+import { xmlLinter } from "@libs/code-mirror/xml-linter";
 import {
   RequestResponseActionTypes,
   SupportedRawLanguages,
-} from "@/src/components/RequestResponse/state/actions";
-import { RequestResponseContext } from "@/src/components/RequestResponse/state/context";
+} from "@components/RequestResponse/state/actions";
+import { RequestResponseContext } from "@components/RequestResponse/state/context";
 import { useTheme } from "next-themes";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

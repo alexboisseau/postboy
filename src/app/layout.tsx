@@ -1,10 +1,10 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Separator } from "@/src/components/ui/separator";
-import Header from "@/src/components/shared/Header";
+import { Separator } from "@components/ui/separator";
+import Header from "@components/shared/Header";
+import { ThemeProvider } from "@components/shared/ThemeProvider";
 import "./globals.css";
-import { ThemeProvider } from "@/src/components/shared/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -1,7 +1,7 @@
-import { Button } from "@/src/components/ui/button";
-import { Checkbox } from "@/src/components/ui/checkbox";
-import { Input } from "@/src/components/ui/input";
-import { ActivatableKeyValue } from "@/src/core/types/activatable-key-value";
+import { Button } from "@components/ui/button";
+import { Checkbox } from "@components/ui/checkbox";
+import { Input } from "@components/ui/input";
+import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import { Trash2 } from "lucide-react";
 
 export default function ActivatableKeyValueTable({

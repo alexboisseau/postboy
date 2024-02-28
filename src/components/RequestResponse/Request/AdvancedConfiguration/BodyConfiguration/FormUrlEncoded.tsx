@@ -1,9 +1,9 @@
 import { useContext } from "react";
 import ActivatableKeyValueTable from "../ActivatableKeyValueTable";
-import { RequestResponseContext } from "@/src/components/RequestResponse/state/context";
-import { RequestResponseActionTypes } from "@/src/components/RequestResponse/state/actions";
-import { ActivatableKeyValue } from "@/src/core/types/activatable-key-value";
-import { Button } from "@/src/components/ui/button";
+import { RequestResponseContext } from "@components/RequestResponse/state/context";
+import { RequestResponseActionTypes } from "@components/RequestResponse/state/actions";
+import { ActivatableKeyValue } from "@core/types/activatable-key-value";
+import { Button } from "@components/ui/button";
 
 export default function FormUrlEncoded() {
   const {

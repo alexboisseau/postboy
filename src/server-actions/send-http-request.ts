@@ -1,8 +1,8 @@
 "use server";
-import { fetchHttpRequester } from "@/src/core/HttpRequester/fetch/FetchHttpRequester";
-import { HttpMethods } from "@/src/core/types/http-method";
-import { HttpRequest } from "@/src/core/types/http-request";
-import { HttpResponse } from "@/src/core/types/http-response";
+import { fetchHttpRequester } from "@core/HttpRequester/fetch/FetchHttpRequester";
+import { HttpMethods } from "@core/types/http-method";
+import { HttpRequest } from "@core/types/http-request";
+import { HttpResponse } from "@core/types/http-response";
 import { z } from "zod";
 
 const httpRequestSchema = z.object({

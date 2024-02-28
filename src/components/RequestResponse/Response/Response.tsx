@@ -5,12 +5,7 @@ import ResponseError from "./ResponseError";
 import KeyValueTable from "./KeyValueTable";
 import CookiesTable from "./CookiesTable";
 import Body from "./Body";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@/src/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 
 export default function Response() {
   const {

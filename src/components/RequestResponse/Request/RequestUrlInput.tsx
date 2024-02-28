@@ -1,5 +1,5 @@
 import { ChangeEvent, KeyboardEvent, useContext } from "react";
-import { Input } from "@/src/components/ui/input";
+import { Input } from "@components/ui/input";
 import { RequestResponseActionTypes } from "../state/actions";
 import { RequestResponseContext } from "../state/context";
 

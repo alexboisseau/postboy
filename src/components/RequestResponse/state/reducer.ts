@@ -1,4 +1,4 @@
-import { QueryParameter } from "@/src/core/types/http-request";
+import { QueryParameter } from "@core/types/http-request";
 import {
   ContentType,
   RequestForm,
@@ -7,7 +7,7 @@ import {
   RequestResponseAction,
   RequestResponseActionTypes,
 } from "./actions";
-import { HttpMethods } from "@/src/core/types/http-method";
+import { HttpMethods } from "@core/types/http-method";
 import { z } from "zod";
 
 function generateUrl(url: string, queryParameters: QueryParameter[]): string {

@@ -2,7 +2,7 @@
 import Request from "./Request/Request";
 import Response from "./Response/Response";
 import { RequestResponseProvider } from "./state/provider";
-import { Separator } from "@/src/components/ui/separator";
+import { Separator } from "@components/ui/separator";
 
 export default function RequestResponse() {
   return (

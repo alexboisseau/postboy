@@ -1,4 +1,4 @@
-import { HttpCookie } from "@/src/core/types/http-response";
+import { HttpCookie } from "@core/types/http-response";
 
 export default function CookiesTable({ cookies }: { cookies: HttpCookie[] }) {
   const tableHeadersTwClasses = "border p-2";

@@ -1,7 +1,7 @@
-import { ActivatableKeyValue } from "@/src/core/types/activatable-key-value";
-import { HttpMethod } from "@/src/core/types/http-method";
-import { Header, QueryParameter } from "@/src/core/types/http-request";
-import { HttpResponse } from "@/src/core/types/http-response";
+import { ActivatableKeyValue } from "@core/types/activatable-key-value";
+import { HttpMethod } from "@core/types/http-method";
+import { Header, QueryParameter } from "@core/types/http-request";
+import { HttpResponse } from "@core/types/http-response";
 
 export type AuthorizationType =
   | "no-auth"

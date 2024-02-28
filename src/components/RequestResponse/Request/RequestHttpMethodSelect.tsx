@@ -5,10 +5,10 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/src/components/ui/select";
+} from "@components/ui/select";
 import { RequestResponseActionTypes } from "../state/actions";
 import { RequestResponseContext } from "../state/context";
-import { HttpMethod } from "@/src/core/types/http-method";
+import { HttpMethod } from "@core/types/http-method";
 
 const httpMethodColors: {
   [K in HttpMethod]: string;

@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { RequestResponseActionTypes } from "../../state/actions";
 import { RequestResponseContext } from "../../state/context";
-import { Button } from "@/src/components/ui/button";
-import { ActivatableKeyValue } from "@/src/core/types/activatable-key-value";
+import { Button } from "@components/ui/button";
+import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import ActivatableKeyValueTable from "./ActivatableKeyValueTable";
 
 export default function QueryParametersConfiguration() {

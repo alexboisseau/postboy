@@ -3,8 +3,8 @@ import {
   HttpResponse,
   HttpResponseHeader,
   HttpResponseSize,
-} from "@/src/core/types/http-response";
-import { formatBytes } from "@/src/core/utils/format-bytes";
+} from "@core/types/http-response";
+import { formatBytes } from "@core/utils/format-bytes";
 
 export class FetchHttpFormatter {
   public async formatResponse({

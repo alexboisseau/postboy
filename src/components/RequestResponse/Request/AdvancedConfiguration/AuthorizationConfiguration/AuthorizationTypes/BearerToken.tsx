@@ -1,7 +1,7 @@
-import { RequestResponseActionTypes } from "@/src/components/RequestResponse/state/actions";
-import { RequestResponseContext } from "@/src/components/RequestResponse/state/context";
-import { Input } from "@/src/components/ui/input";
-import { Label } from "@/src/components/ui/label";
+import { RequestResponseActionTypes } from "@components/RequestResponse/state/actions";
+import { RequestResponseContext } from "@components/RequestResponse/state/context";
+import { Input } from "@components/ui/input";
+import { Label } from "@components/ui/label";
 import { useContext } from "react";
 
 export default function BearerTokenAuthorization() {

@@ -1,4 +1,4 @@
-import { HttpMethod } from "@/src/core/types/http-method";
+import { HttpMethod } from "@core/types/http-method";
 import { Header, HttpRequest } from "../../types/http-request";
 import { HttpResponse } from "../../types/http-response";
 import { IHttpRequester } from "../HttpRequester.interface";

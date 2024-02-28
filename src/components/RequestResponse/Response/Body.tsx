@@ -3,8 +3,8 @@ import { useContext, useEffect, useState } from "react";
 import { RequestResponseContext } from "../state/context";
 import { githubDark, githubLight } from "@uiw/codemirror-theme-github";
 
-import { getLanguageFromContentType } from "@/src/libs/code-mirror/get-language-from-content-type";
-import { formatContent } from "@/src/libs/prettier/formatContent";
+import { getLanguageFromContentType } from "@libs/code-mirror/get-language-from-content-type";
+import { formatContent } from "@libs/prettier/formatContent";
 import { useTheme } from "next-themes";
 
 export default function Body() {
