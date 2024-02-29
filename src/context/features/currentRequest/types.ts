@@ -11,12 +11,7 @@ export type AuthorizationType =
 export type ContentType = "none" | "x-www-form-urlencoded" | "raw";
 export type SupportedRawLanguages = "json" | "xml";
 
-export type RequestFormErrors = {
-  httpMethod: string | null;
-  url: string | null;
-};
-
-export type RequestFormAuthorization = {
+export type RequestFieldsAuthorization = {
   type: AuthorizationType;
   apiKey: {
     key: string;
@@ -31,7 +26,7 @@ export type RequestFormAuthorization = {
   };
 };
 
-export type RequestFormBody = {
+export type RequestFieldsBody = {
   contentType: ContentType;
   raw: {
     language: SupportedRawLanguages;
@@ -40,27 +35,28 @@ export type RequestFormBody = {
   xWwwFormUrlencoded: ActivatableKeyValue[];
 };
 
-export type RequestFormFields = {
-  httpMethod: HttpMethod;
-  url: string;
-  queryParameters: QueryParameter[];
+export type RequestFields = {
+  authorization: RequestFieldsAuthorization;
+  body: RequestFieldsBody;
   headers: Header[];
-  authorization: RequestFormAuthorization;
-  body: RequestFormBody;
+  httpMethod: HttpMethod;
+  queryParameters: QueryParameter[];
+  url: string;
 };
 
-export type RequestForm = {
-  errors: RequestFormErrors;
-  fields: RequestFormFields;
-  isSubmitting: boolean;
+export type RequestErrors = {
+  httpMethod: string | null;
+  url: string | null;
 };
 
-export type Response = {
+export type RequestResponse = {
   value: HttpResponse | null;
   error: string | null;
 };
 
-export interface RequestResponseState {
-  request: RequestForm;
-  response: Response;
+export interface CurrentRequestState {
+  errors: RequestErrors;
+  fields: RequestFields;
+  isSubmitting: boolean;
+  response: RequestResponse;
 }

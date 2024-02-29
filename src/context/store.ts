@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
-import requestResponseReducer from "./features/requestResponse/requestResponseSlice";
+import currentRequestReducer from "./features/currentRequest/currentRequestSlice";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      requestResponse: requestResponseReducer,
+      currentRequest: currentRequestReducer,
     },
   });
 };
