@@ -1,13 +1,9 @@
-import { useContext, useMemo } from "react";
-import { RequestResponseContext } from "../state/context";
+import { selectCurrentRequest } from "@context/features/currentRequest/currentRequestSelectors";
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { useMemo } from "react";
 
 export default function ResponseHeader() {
-  const {
-    requestResponse: {
-      request: { isSubmitting },
-      response,
-    },
-  } = useContext(RequestResponseContext);
+  const { isSubmitting, response } = useAppSelector(selectCurrentRequest);
 
   const color = useMemo(() => {
     const firstNumber = response.value?.status.toString().charAt(0);

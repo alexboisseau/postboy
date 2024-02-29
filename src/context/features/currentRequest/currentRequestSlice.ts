@@ -12,6 +12,10 @@ import {
 } from "./types";
 import generateUrlWithQueryParameters from "./generateUrlWithQueryParameters";
 import getContentTypeHeader from "./getContentTypeHeader";
+import { AppDispatch, AppGetState } from "@context/store";
+import { sendHttpRequest } from "@server-actions/send-http-request";
+import validateCurrentRequest from "./validateCurrentRequest";
+import extractBodyFromCurrentRequest from "./extractBodyFromCurrentRequest";
 
 const initialState: CurrentRequestState = {
   fields: {
@@ -52,6 +56,34 @@ const initialState: CurrentRequestState = {
     error: null,
   },
 };
+
+export const submitCurrentRequest =
+  () => async (dispatch: AppDispatch, getState: AppGetState) => {
+    const currentRequest = getState().currentRequest;
+    dispatch(submit());
+
+    const formValidation = validateCurrentRequest(currentRequest);
+    if (formValidation.success === false) {
+      dispatch(invalid(formValidation.errors));
+      return;
+    }
+
+    try {
+      const response: HttpResponse = await sendHttpRequest({
+        body: extractBodyFromCurrentRequest(currentRequest),
+        headers: currentRequest.fields.headers,
+        method: currentRequest.fields.httpMethod,
+        url: currentRequest.fields.url,
+      });
+
+      dispatch(success(response));
+      return response;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      console.error(error);
+      dispatch(fail(error.message));
+    }
+  };
 
 export const currentRequestSlice = createSlice({
   name: "currentRequest",
@@ -156,6 +188,13 @@ export const currentRequestSlice = createSlice({
       state.fields.headers = state.fields.headers.filter(
         (header) => header.key !== "Authorization"
       );
+
+      if (state.fields.authorization.type === "api-key") {
+        console.log("here");
+        state.fields.headers = state.fields.headers.filter(
+          (header) => header.key !== state.fields.authorization.apiKey.key
+        );
+      }
 
       const headerValue = (() => {
         if (action.payload === "basic") {
@@ -276,6 +315,19 @@ export const currentRequestSlice = createSlice({
       action: PayloadAction<SupportedRawLanguages>
     ) => {
       state.fields.body.raw.language = action.payload;
+      state.fields.headers = state.fields.headers.filter(
+        (header) => header.key !== "Content-Type"
+      );
+
+      const contentTypeHeader = getContentTypeHeader(
+        state.fields.body.contentType,
+        state
+      );
+      state.fields.headers.push({
+        key: "Content-Type",
+        value: contentTypeHeader,
+        active: true,
+      });
     },
     updateBodyRawValue: (state, action: PayloadAction<string>) => {
       state.fields.body.raw.value = action.payload;

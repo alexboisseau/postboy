@@ -1,30 +1,25 @@
 import { ChangeEvent, KeyboardEvent, useContext } from "react";
 import { Input } from "@components/ui/input";
-import { RequestResponseActionTypes } from "../state/actions";
 import { RequestResponseContext } from "../state/context";
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { useAppDispatch } from "@context/hooks/use-app-dispatch";
+import {
+  submitCurrentRequest,
+  updateUrl,
+} from "@context/features/currentRequest/currentRequestSlice";
+import { selectCurrentRequest } from "@context/features/currentRequest/currentRequestSelectors";
 
 export default function RequestUrlInput() {
-  const {
-    requestResponse: {
-      request: {
-        fields: { url },
-        errors,
-      },
-    },
-    dispatchRequestResponseAction,
-    handleSend,
-  } = useContext(RequestResponseContext);
+  const { fields, errors } = useAppSelector(selectCurrentRequest);
+  const dispatch = useAppDispatch();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_UPDATE_URL,
-      payload: e.target.value,
-    });
+    dispatch(updateUrl(e.target.value));
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      handleSend();
+      submitCurrentRequest();
     }
   };
 
@@ -32,7 +27,7 @@ export default function RequestUrlInput() {
     <div className="flex flex-col gap-1 w-full">
       <Input
         type="url"
-        value={url}
+        value={fields.url}
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />

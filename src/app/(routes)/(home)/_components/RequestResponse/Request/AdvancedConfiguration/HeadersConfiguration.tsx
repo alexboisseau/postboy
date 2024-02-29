@@ -1,51 +1,42 @@
-import { useContext } from "react";
-import { RequestResponseActionTypes } from "../../state/actions";
-import { RequestResponseContext } from "../../state/context";
-import ActivatableKeyValueTable from "./ActivatableKeyValueTable";
 import { Button } from "@components/ui/button";
 import { ActivatableKeyValue } from "@core/types/activatable-key-value";
+import ActivatableKeyValueTable from "./ActivatableKeyValueTable";
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { useAppDispatch } from "@context/hooks/use-app-dispatch";
+import {
+  addHeader,
+  checkAllHeaders,
+  removeHeader,
+  updateHeader,
+} from "@context/features/currentRequest/currentRequestSlice";
+import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
 
 export default function HeadersConfiguration() {
-  const {
-    requestResponse: {
-      request: {
-        fields: { headers },
-      },
-    },
-    dispatchRequestResponseAction,
-  } = useContext(RequestResponseContext);
+  const { headers } = useAppSelector(selectCurrentRequestFields);
+  const dispatch = useAppDispatch();
 
   const handleCheckedAll = (checked: boolean) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_CHECK_ALL_HEADERS,
-      payload: checked,
-    });
+    dispatch(checkAllHeaders(checked));
   };
 
   const handleUpdateParam = (
     updatedParam: ActivatableKeyValue,
     index: number
   ) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_UPDATE_HEADER,
-      payload: {
-        index,
+    dispatch(
+      updateHeader({
         header: updatedParam,
-      },
-    });
+        index,
+      })
+    );
   };
 
   const handleNewParam = () => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_NEW_HEADER,
-    });
+    dispatch(addHeader());
   };
 
   const handleRemoveParam = (index: number) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_REMOVE_HEADER,
-      payload: index,
-    });
+    dispatch(removeHeader(index));
   };
 
   return (

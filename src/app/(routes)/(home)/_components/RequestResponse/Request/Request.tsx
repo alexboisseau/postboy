@@ -1,18 +1,16 @@
 "use client";
-import { useContext } from "react";
 import AdvancedConfiguration from "./AdvancedConfiguration/AdvancedConfiguration";
 import RequestHttpMethodSelect from "./RequestHttpMethodSelect";
 import RequestUrlInput from "./RequestUrlInput";
-import { RequestResponseContext } from "../state/context";
 import { Button } from "../../../../../../components/ui/button";
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { selectCurrentRequest } from "@context/features/currentRequest/currentRequestSelectors";
+import { submitCurrentRequest } from "@context/features/currentRequest/currentRequestSlice";
+import { useAppDispatch } from "@context/hooks/use-app-dispatch";
 
 export default function Request() {
-  const {
-    requestResponse: {
-      request: { fields, isSubmitting },
-    },
-    handleSend,
-  } = useContext(RequestResponseContext);
+  const { fields, isSubmitting } = useAppSelector(selectCurrentRequest);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="flex flex-col gap-2">
@@ -21,7 +19,9 @@ export default function Request() {
         <RequestHttpMethodSelect />
         <RequestUrlInput />
         <Button
-          onClick={handleSend}
+          onClick={() => {
+            dispatch(submitCurrentRequest());
+          }}
           disabled={isSubmitting || Boolean(fields.url) === false}
           variant={"secondary"}
         >

@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import {
   Select,
   SelectContent,
@@ -6,9 +5,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@components/ui/select";
-import { RequestResponseActionTypes } from "../state/actions";
-import { RequestResponseContext } from "../state/context";
 import { HttpMethod } from "@core/types/http-method";
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { useAppDispatch } from "@context/hooks/use-app-dispatch";
+import { updateHttpMethod } from "@context/features/currentRequest/currentRequestSlice";
+import { selectCurrentRequest } from "@context/features/currentRequest/currentRequestSelectors";
 
 const httpMethodColors: {
   [K in HttpMethod]: string;
@@ -23,28 +24,18 @@ const httpMethodColors: {
 };
 
 export default function RequestHttpMethodSelect() {
-  const {
-    requestResponse: {
-      request: {
-        fields: { httpMethod },
-        errors,
-      },
-    },
-    dispatchRequestResponseAction,
-  } = useContext(RequestResponseContext);
+  const { fields, errors } = useAppSelector(selectCurrentRequest);
+  const dispatch = useAppDispatch();
 
   const handleChange = (value: HttpMethod) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_UPDATE_HTTP_METHOD,
-      payload: value,
-    });
+    dispatch(updateHttpMethod(value));
   };
 
   return (
     <div className="flex flex-col gap-1">
-      <Select value={httpMethod} onValueChange={handleChange}>
+      <Select value={fields.httpMethod} onValueChange={handleChange}>
         <SelectTrigger
-          className={`w-32 font-semibold ${httpMethodColors[httpMethod]}`}
+          className={`w-32 font-semibold ${httpMethodColors[fields.httpMethod]}`}
         >
           <SelectValue placeholder="HTTP Method" />
         </SelectTrigger>

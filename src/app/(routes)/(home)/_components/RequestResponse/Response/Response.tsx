@@ -1,16 +1,15 @@
-import { useContext } from "react";
-import { RequestResponseContext } from "../state/context";
+"use client";
 import ResponseHeader from "./ResponseHeader";
 import ResponseError from "./ResponseError";
 import KeyValueTable from "./KeyValueTable";
 import CookiesTable from "./CookiesTable";
 import Body from "./Body";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { selectCurrentRequest } from "@context/features/currentRequest/currentRequestSelectors";
 
 export default function Response() {
-  const {
-    requestResponse: { response },
-  } = useContext(RequestResponseContext);
+  const { response } = useAppSelector(selectCurrentRequest);
 
   return (
     <div className="flex flex-col gap-1">

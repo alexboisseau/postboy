@@ -1,62 +1,46 @@
-import { useContext } from "react";
-import { RequestResponseActionTypes } from "../../state/actions";
-import { RequestResponseContext } from "../../state/context";
 import { Button } from "@components/ui/button";
 import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import ActivatableKeyValueTable from "./ActivatableKeyValueTable";
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { useAppDispatch } from "@context/hooks/use-app-dispatch";
+import {
+  addQueryParameter,
+  checkAllQueryParameters,
+  removeQueryParameter,
+  updateQueryParameter,
+} from "@context/features/currentRequest/currentRequestSlice";
+import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
 
 export default function QueryParametersConfiguration() {
-  const {
-    requestResponse: {
-      request: {
-        fields: { queryParameters },
-      },
-    },
-    dispatchRequestResponseAction,
-  } = useContext(RequestResponseContext);
-
-  const handleCheckedAll = (checked: boolean) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_CHECK_ALL_QUERY_PARAMETERS,
-      payload: checked,
-    });
-  };
-
-  const handleUpdateParam = (
-    updatedParam: ActivatableKeyValue,
-    index: number
-  ) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_UPDATE_QUERY_PARAMETER,
-      payload: {
-        index,
-        queryParameter: updatedParam,
-      },
-    });
-  };
-
-  const handleNewParam = () => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_NEW_QUERY_PARAMETER,
-    });
-  };
-
-  const handleRemoveParam = (index: number) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_REMOVE_QUERY_PARAMETER,
-      payload: index,
-    });
-  };
+  const { queryParameters } = useAppSelector(selectCurrentRequestFields);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="flex flex-col">
       <ActivatableKeyValueTable
         data={queryParameters}
-        onCheckAll={handleCheckedAll}
-        onUpdateRecord={handleUpdateParam}
-        onRemoveRecord={handleRemoveParam}
+        onCheckAll={(checked: boolean) => {
+          dispatch(checkAllQueryParameters(checked));
+        }}
+        onUpdateRecord={(updatedParam: ActivatableKeyValue, index: number) => {
+          dispatch(
+            updateQueryParameter({
+              queryParameter: updatedParam,
+              index,
+            })
+          );
+        }}
+        onRemoveRecord={(index: number) => {
+          dispatch(removeQueryParameter(index));
+        }}
       />
-      <Button onClick={handleNewParam} className="w-fit" variant={"secondary"}>
+      <Button
+        onClick={() => {
+          dispatch(addQueryParameter());
+        }}
+        className="w-fit"
+        variant={"secondary"}
+      >
         Add Param
       </Button>
     </div>

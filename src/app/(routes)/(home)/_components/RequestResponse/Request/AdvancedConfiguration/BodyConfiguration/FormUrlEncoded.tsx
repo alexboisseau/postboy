@@ -1,50 +1,44 @@
-import { useContext } from "react";
 import ActivatableKeyValueTable from "../ActivatableKeyValueTable";
-import { RequestResponseContext } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/context";
-import { RequestResponseActionTypes } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/actions";
 import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import { Button } from "@components/ui/button";
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { useAppDispatch } from "@context/hooks/use-app-dispatch";
+import {
+  addBodyXWwwFormUrlencodedRecord,
+  checkAllBodyXWwwFormUrlencodedRecords,
+  removeBodyXWwwFormUrlencodedRecord,
+  updateBodyXWwwFormUrlencodedRecord,
+} from "@context/features/currentRequest/currentRequestSlice";
+import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
 
 export default function FormUrlEncoded() {
   const {
-    requestResponse: {
-      request: {
-        fields: {
-          body: { xWwwFormUrlencoded },
-        },
-      },
-    },
-    dispatchRequestResponseAction,
-  } = useContext(RequestResponseContext);
+    body: { xWwwFormUrlencoded },
+  } = useAppSelector(selectCurrentRequestFields);
+  const dispatch = useAppDispatch();
 
   const handleCheckAll = (checked: boolean) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_CHECK_ALL_X_WWW_FORM_URLENCODED_RECORDS,
-      payload: checked,
-    });
+    dispatch(checkAllBodyXWwwFormUrlencodedRecords(checked));
   };
 
   const handleAddRecord = () => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_NEW_X_WWW_FORM_URLENCODED_RECORD,
-    });
+    dispatch(addBodyXWwwFormUrlencodedRecord());
   };
 
   const handleRemoveRecord = (index: number) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_REMOVE_X_WWW_FORM_URLENCODED_RECORD,
-      payload: index,
-    });
+    dispatch(removeBodyXWwwFormUrlencodedRecord(index));
   };
 
   const handleUpdateRecord = (
     updatedRecord: ActivatableKeyValue,
     index: number
   ) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_UPDATE_X_WWW_FORM_URLENCODED_RECORD,
-      payload: { record: updatedRecord, index },
-    });
+    dispatch(
+      updateBodyXWwwFormUrlencodedRecord({
+        index,
+        record: updatedRecord,
+      })
+    );
   };
 
   return (

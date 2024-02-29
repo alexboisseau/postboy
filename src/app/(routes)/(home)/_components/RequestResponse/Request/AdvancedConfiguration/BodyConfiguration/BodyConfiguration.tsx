@@ -1,4 +1,3 @@
-import { useContext } from "react";
 import { RadioGroup, RadioGroupItem } from "@components/ui/radio-group";
 import {
   Select,
@@ -9,12 +8,18 @@ import {
 } from "@components/ui/select";
 import RawEditor from "./RawEditor";
 import FormUrlEncoded from "./FormUrlEncoded";
-import { RequestResponseContext } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/context";
+
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { useAppDispatch } from "@context/hooks/use-app-dispatch";
+import {
+  updateBodyContentType,
+  updateBodyRawLanguage,
+} from "@context/features/currentRequest/currentRequestSlice";
 import {
   ContentType,
-  RequestResponseActionTypes,
   SupportedRawLanguages,
-} from "@/src/app/(routes)/(home)/_components/RequestResponse/state/actions";
+} from "@context/features/currentRequest/types";
+import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
 
 function SelectContentType({
   contentType,
@@ -72,40 +77,24 @@ function SelectContentType({
 
 export default function BodyConfiguration() {
   const {
-    requestResponse: {
-      request: {
-        fields: {
-          body: {
-            contentType,
-            raw: { language: currentLanguageExtension },
-          },
-        },
-      },
+    body: {
+      contentType,
+      raw: { language: currentLanguageExtension },
     },
-    dispatchRequestResponseAction,
-  } = useContext(RequestResponseContext);
-
-  const handleContentTypeChange = (value: ContentType) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_UPDATE_BODY_CONTENT_TYPE,
-      payload: value,
-    });
-  };
-
-  const handleRawLanguageChange = (value: SupportedRawLanguages) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_UPDATE_BODY_RAW_LANGUAGE,
-      payload: value,
-    });
-  };
+  } = useAppSelector(selectCurrentRequestFields);
+  const dispatch = useAppDispatch();
 
   return (
     <div className="flex flex-col gap-2 text-sm">
       <SelectContentType
         contentType={contentType}
         currentLanguageExtension={currentLanguageExtension}
-        handleContentTypeChange={handleContentTypeChange}
-        handleLanguageChange={handleRawLanguageChange}
+        handleContentTypeChange={(value: ContentType) => {
+          dispatch(updateBodyContentType(value));
+        }}
+        handleLanguageChange={(value: SupportedRawLanguages) => {
+          dispatch(updateBodyRawLanguage(value));
+        }}
       />
       {contentType === "none" && (
         <p className="text-center">This request does not have body</p>

@@ -1,37 +1,27 @@
 import {
-  AuthorizationType,
-  RequestResponseActionTypes,
-} from "@/src/app/(routes)/(home)/_components/RequestResponse/state/actions";
-import { RequestResponseContext } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/context";
-import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@components/ui/select";
-import { useContext } from "react";
 import BasicAuthorization from "./AuthorizationTypes/Basic";
 import BearerTokenAuthorization from "./AuthorizationTypes/BearerToken";
 import ApiKeyAuthorization from "./AuthorizationTypes/ApiKey";
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { useAppDispatch } from "@context/hooks/use-app-dispatch";
+import { AuthorizationType } from "@context/features/currentRequest/types";
+import { updateAuthorizationType } from "@context/features/currentRequest/currentRequestSlice";
+import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
 
 function AuthorizationTypeSelector() {
   const {
-    requestResponse: {
-      request: {
-        fields: {
-          authorization: { type },
-        },
-      },
-    },
-    dispatchRequestResponseAction,
-  } = useContext(RequestResponseContext);
+    authorization: { type },
+  } = useAppSelector(selectCurrentRequestFields);
+  const dispatch = useAppDispatch();
 
   const handleChange = (value: AuthorizationType) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_TYPE,
-      payload: value,
-    });
+    dispatch(updateAuthorizationType(value));
   };
 
   return (
@@ -60,14 +50,8 @@ function AuthorizationTypeSelector() {
 
 export default function AuthorizationConfiguration() {
   const {
-    requestResponse: {
-      request: {
-        fields: {
-          authorization: { type },
-        },
-      },
-    },
-  } = useContext(RequestResponseContext);
+    authorization: { type },
+  } = useAppSelector(selectCurrentRequestFields);
 
   return (
     <div className="p-2 flex gap-36">

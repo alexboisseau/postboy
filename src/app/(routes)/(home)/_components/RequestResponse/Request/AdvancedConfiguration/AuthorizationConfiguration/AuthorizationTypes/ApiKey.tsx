@@ -1,34 +1,26 @@
-import { RequestResponseActionTypes } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/actions";
-import { RequestResponseContext } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/context";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
-import { useContext } from "react";
+import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
+import {
+  updateAuthorizationApiKeyKey,
+  updateAuthorizationApiKeyValue,
+} from "@context/features/currentRequest/currentRequestSlice";
+import { useAppDispatch } from "@context/hooks/use-app-dispatch";
+import { useAppSelector } from "@context/hooks/use-app-selector";
 
 export default function ApiKeyAuthorization() {
   const {
-    requestResponse: {
-      request: {
-        fields: {
-          authorization: { apiKey },
-        },
-      },
-    },
-    dispatchRequestResponseAction,
-  } = useContext(RequestResponseContext);
+    authorization: { apiKey },
+  } = useAppSelector(selectCurrentRequestFields);
+  const dispatch = useAppDispatch();
 
   const handleChange = (value: string, field: "key" | "value") => {
     switch (field) {
       case "key":
-        dispatchRequestResponseAction({
-          type: RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_API_KEY_KEY,
-          payload: value,
-        });
+        dispatch(updateAuthorizationApiKeyKey(value));
         break;
       case "value":
-        dispatchRequestResponseAction({
-          type: RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_API_KEY_VALUE,
-          payload: value,
-        });
+        dispatch(updateAuthorizationApiKeyValue(value));
         break;
     }
   };

@@ -3,17 +3,11 @@ import HeadersConfiguration from "./HeadersConfiguration";
 import BodyConfiguration from "./BodyConfiguration/BodyConfiguration";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@components/ui/tabs";
 import AuthorizationConfiguration from "./AuthorizationConfiguration/AuthorizationConfiguration";
-import { useContext } from "react";
-import { RequestResponseContext } from "../../state/context";
+import { useAppSelector } from "@context/hooks/use-app-selector";
+import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
 
 export default function AdvancedConfiguration() {
-  const {
-    requestResponse: {
-      request: {
-        fields: { authorization },
-      },
-    },
-  } = useContext(RequestResponseContext);
+  const { authorization } = useAppSelector(selectCurrentRequestFields);
 
   const authorizationIsActive = authorization.type !== "no-auth";
 

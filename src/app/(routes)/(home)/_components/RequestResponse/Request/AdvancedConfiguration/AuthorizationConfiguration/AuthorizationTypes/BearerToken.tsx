@@ -1,28 +1,20 @@
-import { RequestResponseActionTypes } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/actions";
-import { RequestResponseContext } from "@/src/app/(routes)/(home)/_components/RequestResponse/state/context";
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
-import { useContext } from "react";
+import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
+import { updateAuthorizationBearerToken } from "@context/features/currentRequest/currentRequestSlice";
+import { useAppDispatch } from "@context/hooks/use-app-dispatch";
+import { useAppSelector } from "@context/hooks/use-app-selector";
 
 export default function BearerTokenAuthorization() {
   const {
-    requestResponse: {
-      request: {
-        fields: {
-          authorization: {
-            bearerToken: { token },
-          },
-        },
-      },
+    authorization: {
+      bearerToken: { token },
     },
-    dispatchRequestResponseAction,
-  } = useContext(RequestResponseContext);
+  } = useAppSelector(selectCurrentRequestFields);
+  const dispatch = useAppDispatch();
 
   const handleChange = (value: string) => {
-    dispatchRequestResponseAction({
-      type: RequestResponseActionTypes.REQUEST_UPDATE_AUTHORIZATION_BEARER_TOKEN,
-      payload: value,
-    });
+    dispatch(updateAuthorizationBearerToken(value));
   };
 
   return (
