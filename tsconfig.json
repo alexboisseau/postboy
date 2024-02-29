@@ -18,8 +18,9 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"],
+      "@app/*": ["./src/app/*"],
       "@components/*": ["./src/components/*"],
+      "@context/*": ["./src/context/*"],
       "@core/*": ["./src/core/*"],
       "@server-actions/*": ["./src/server-actions/*"],
       "@libs/*": ["./src/libs/*"]
