@@ -2,7 +2,7 @@
 import AdvancedConfiguration from "./AdvancedConfiguration/AdvancedConfiguration";
 import RequestHttpMethodSelect from "./RequestHttpMethodSelect";
 import RequestUrlInput from "./RequestUrlInput";
-import { Button } from "../../../../../../components/ui/button";
+import { Button } from "@components/ui/button";
 import { useAppSelector } from "@context/hooks/use-app-selector";
 import { selectCurrentRequest } from "@context/features/currentRequest/currentRequestSelectors";
 import { submitCurrentRequest } from "@context/features/currentRequest/currentRequestSlice";
