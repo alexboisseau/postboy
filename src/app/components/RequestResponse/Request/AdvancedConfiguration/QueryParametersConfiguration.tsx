@@ -10,6 +10,7 @@ import {
   updateQueryParameter,
 } from "@context/features/currentRequest/currentRequestSlice";
 import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
+import { Plus } from "lucide-react";
 
 export default function QueryParametersConfiguration() {
   const { queryParameters } = useAppSelector(selectCurrentRequestFields);
@@ -35,13 +36,14 @@ export default function QueryParametersConfiguration() {
         }}
       />
       <Button
+        className="w-fit flex gap-2 items-center"
         onClick={() => {
           dispatch(addQueryParameter());
         }}
-        className="w-fit"
-        variant={"secondary"}
+        variant={"outline"}
       >
-        Add Param
+        <Plus size="16" />
+        <span>Add Param</span>
       </Button>
     </div>
   );

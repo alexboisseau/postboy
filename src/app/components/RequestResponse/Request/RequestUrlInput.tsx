@@ -30,7 +30,9 @@ export default function RequestUrlInput() {
         onChange={handleChange}
         onKeyDown={handleKeyDown}
       />
-      {errors.url && <span className="text-sm text-red-500">{errors.url}</span>}
+      {errors.url && (
+        <span className="text-sm text-destructive">{errors.url}</span>
+      )}
     </div>
   );
 }

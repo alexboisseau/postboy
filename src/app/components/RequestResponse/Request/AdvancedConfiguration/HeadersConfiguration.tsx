@@ -10,6 +10,7 @@ import {
   updateHeader,
 } from "@context/features/currentRequest/currentRequestSlice";
 import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
+import { Plus } from "lucide-react";
 
 export default function HeadersConfiguration() {
   const { headers } = useAppSelector(selectCurrentRequestFields);
@@ -47,8 +48,13 @@ export default function HeadersConfiguration() {
         onUpdateRecord={handleUpdateParam}
         onRemoveRecord={handleRemoveParam}
       />
-      <Button onClick={handleNewParam} className="w-fit" variant={"secondary"}>
-        Add Header
+      <Button
+        className="w-fit flex gap-2 items-center"
+        onClick={handleNewParam}
+        variant={"outline"}
+      >
+        <Plus size="16" />
+        <span>Add Header</span>
       </Button>
     </div>
   );

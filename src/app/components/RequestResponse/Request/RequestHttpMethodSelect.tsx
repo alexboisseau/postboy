@@ -19,8 +19,8 @@ const httpMethodColors: {
   PUT: "text-yellow-600",
   PATCH: "text-yellow-600",
   DELETE: "text-red-600",
-  OPTIONS: "text-slate-600",
-  HEAD: "text-slate-600",
+  OPTIONS: "text-zinc-600",
+  HEAD: "text-zinc-600",
 };
 
 export default function RequestHttpMethodSelect() {
@@ -61,7 +61,7 @@ export default function RequestHttpMethodSelect() {
         </SelectContent>
       </Select>
       {errors.httpMethod && (
-        <span className="text-sm text-red-500">{errors.httpMethod}</span>
+        <span className="text-sm text-destructive">{errors.httpMethod}</span>
       )}
     </div>
   );

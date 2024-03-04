@@ -20,7 +20,7 @@ export default function AdvancedConfiguration() {
           <div className="flex gap-1 items-center">
             <span>Authorization</span>
             <div
-              className={`${authorizationIsActive ? "bg-green-600" : "bg-red-600"} rounded-full w-[7px] h-[7px]`}
+              className={`${authorizationIsActive ? "bg-green-500" : "bg-red-500"} rounded-full w-[7px] h-[7px]`}
             ></div>
           </div>
         </TabsTrigger>

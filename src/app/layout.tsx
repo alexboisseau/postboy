@@ -1,11 +1,11 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Separator } from "@components/ui/separator";
+import SideBar from "@components/common/SideBar";
 import Header from "@components/common/Header";
 import { ThemeProvider } from "@components/common/ThemeProvider";
-import "./globals.css";
 import StoreProvider from "@context/StoreProvider";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,19 +21,22 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} bg-zinc-50 dark:bg-zinc-950 flex flex-col min-h-screen`}
-      >
+      <body className={`${inter.className} w-screen`}>
         <StoreProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="system"
-            enableSystem
+            defaultTheme="light"
             disableTransitionOnChange
           >
-            <Header />
-            <Separator />
-            {children}
+            <div className="flex">
+              <SideBar />
+              <div className="w-full flex flex-col items-stretch">
+                <Header />
+                <main className="h-full p-2 bg-primary-foreground">
+                  {children}
+                </main>
+              </div>
+            </div>
           </ThemeProvider>
         </StoreProvider>
       </body>

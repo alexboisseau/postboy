@@ -12,7 +12,7 @@ export default function Response() {
   const { response } = useAppSelector(selectCurrentRequest);
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col gap-1 py-5 px-6 bg-background border-[1px]">
       <ResponseHeader />
       {response.value !== null && (
         <Tabs defaultValue="body">
