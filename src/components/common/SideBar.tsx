@@ -36,7 +36,7 @@ export default function SideBar() {
           icon={<Plus size="20" />}
         />
         <TabLink
-          href={"/"}
+          href={"/collections"}
           label="Collections (soon)"
           isActive={false}
           icon={<Boxes size="20" />}
