@@ -1,6 +1,7 @@
 "use client";
 import { Boxes, Container, Plus } from "lucide-react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 type TabLinkProps = {
   href: string;
@@ -22,6 +23,8 @@ function TabLink({ href, label, isActive, icon }: TabLinkProps) {
 }
 
 export default function SideBar() {
+  const pathName = usePathname();
+
   return (
     <div className="h-screen min-w-[300px] border-r-[1px]">
       <div className="h-[65px] border-b-[1px] flex flex-col justify-center">
@@ -32,19 +35,19 @@ export default function SideBar() {
         <TabLink
           href={"/"}
           label="New Request"
-          isActive={true}
+          isActive={pathName === "/"}
           icon={<Plus size="20" />}
         />
         <TabLink
           href={"/collections"}
           label="Collections (soon)"
-          isActive={false}
+          isActive={pathName === "/collections"}
           icon={<Boxes size="20" />}
         />
         <TabLink
           href={"/environments"}
           label="Environments (soon)"
-          isActive={false}
+          isActive={pathName === "/environments"}
           icon={<Container size="20" />}
         />
       </div>
