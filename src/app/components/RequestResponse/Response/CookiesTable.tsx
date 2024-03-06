@@ -22,7 +22,7 @@ export default function CookiesTable({ cookies }: { cookies: HttpCookie[] }) {
           <tbody>
             {cookies.map((cookie, index) => {
               return (
-                <tr key={index} className="text- sm">
+                <tr key={index} className="text-sm">
                   <td className={tableRowsTwClasses}>{cookie.key}</td>
                   <td className={tableRowsTwClasses}>{cookie.value}</td>
                   <td className={tableRowsTwClasses}>{cookie.domain}</td>

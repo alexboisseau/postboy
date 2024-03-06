@@ -1,3 +1,4 @@
+import { Skeleton } from "@components/ui/skeleton";
 import { selectCurrentRequest } from "@context/features/currentRequest/currentRequestSelectors";
 import { useAppSelector } from "@context/hooks/use-app-selector";
 import { useMemo } from "react";
@@ -24,10 +25,16 @@ export default function ResponseHeader() {
   const valueClassName = `font-bold ${color}`;
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between items-center">
       <p className={"text-foreground font-semibold"}>Response</p>
       <div>
-        {isSubmitting && <p className="text-sm">Loading...</p>}
+        {isSubmitting && (
+          <div className="flex gap-4">
+            <Skeleton className="w-32 h-3" />
+            <Skeleton className="w-32 h-3" />
+            <Skeleton className="w-32 h-3" />
+          </div>
+        )}
         {response.value !== null && (
           <div className="flex gap-4">
             <p className="text-sm ">
