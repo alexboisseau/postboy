@@ -24,7 +24,7 @@
     "@radix-ui/react-tabs": "^1.0.4",
     "@reduxjs/toolkit": "^2.2.1",
     "@uiw/codemirror-theme-github": "^4.21.22",
-    "@uiw/react-codemirror": "^4.21.22",
+    "@uiw/react-codemirror": "^4.21.24",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "fast-xml-parser": "^4.3.5",
