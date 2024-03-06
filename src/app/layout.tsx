@@ -1,8 +1,8 @@
 import React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import SideBar from "@components/common/SideBar";
 import Header from "@components/common/Header";
+import SideBar from "@components/common/SideBar";
 import { ThemeProvider } from "@components/common/ThemeProvider";
 import StoreProvider from "@context/StoreProvider";
 import "./globals.css";
@@ -20,22 +20,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${inter.className} w-screen`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`${inter.className} w-screen max-h-screen flex`}>
         <StoreProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
             disableTransitionOnChange
           >
-            <div className="flex">
-              <SideBar />
-              <div className="w-full flex flex-col items-stretch">
-                <Header />
-                <main className="h-full p-2 bg-primary-foreground">
-                  {children}
-                </main>
-              </div>
+            <SideBar />
+            <div className="flex flex-col w-full items-stretch overflow-x-auto">
+              <Header />
+              <main className="h-full p-2 bg-primary-foreground overflow-y-auto">
+                {children}
+              </main>
             </div>
           </ThemeProvider>
         </StoreProvider>
