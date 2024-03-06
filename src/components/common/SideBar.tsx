@@ -13,7 +13,7 @@ function TabLink({ href, label, isActive, icon }: TabLinkProps) {
   return (
     <Link
       href={href}
-      className={`flex gap-3 p-2 rounded items-center ${isActive ? "bg-primary-foreground border text-primary" : "text-zinc-700 dark:text-zinc-400"}`}
+      className={`flex gap-3 p-2 rounded items-center ${isActive ? "bg-primary-foreground border text-primary" : "text-zinc-700 dark:text-zinc-400 hover:bg-primary-foreground hover:text-primary hover:dark:text-primary"}`}
     >
       {icon !== undefined && icon}
       <span>{label}</span>
