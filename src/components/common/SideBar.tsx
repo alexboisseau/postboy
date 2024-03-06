@@ -42,7 +42,7 @@ export default function SideBar() {
           icon={<Boxes size="20" />}
         />
         <TabLink
-          href={"/"}
+          href={"/environments"}
           label="Environments (soon)"
           isActive={false}
           icon={<Container size="20" />}
