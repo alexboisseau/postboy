@@ -93,7 +93,27 @@ export const currentRequestSlice = createSlice({
       state.fields.httpMethod = action.payload;
     },
     updateUrl: (state, action: PayloadAction<string>) => {
-      state.fields.url = action.payload;
+      const url = action.payload;
+      const queryParameters: QueryParameter[] =
+        state.fields.queryParameters.filter((qp) => qp.active === false);
+      const queryParametersString = url.split("?")[1];
+
+      if (queryParametersString !== undefined) {
+        const urlSearchParams = new URLSearchParams(queryParametersString);
+        const activeParameters = Array.from(urlSearchParams).map(
+          ([key, value]) => {
+            return {
+              key,
+              value,
+              active: true,
+            };
+          }
+        );
+        queryParameters.push(...activeParameters);
+      }
+
+      state.fields.url = url;
+      state.fields.queryParameters = queryParameters;
     },
     addQueryParameter: (state) => {
       const updatedQueryParameters = [
