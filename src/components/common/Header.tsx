@@ -45,6 +45,7 @@ export default function Header() {
                 baseTheme: theme === "dark" ? dark : undefined,
               },
             }}
+            afterSignOutUrl="/"
           />
         </>
       ) : (
