@@ -1,7 +1,8 @@
 "use client";
+import { useAuth } from "@clerk/nextjs";
 import { Boxes, Container, Plus } from "lucide-react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 
 type TabLinkProps = {
   href: string;
@@ -24,6 +25,7 @@ function TabLink({ href, label, isActive, icon }: TabLinkProps) {
 
 export default function SideBar() {
   const pathName = usePathname();
+  const { isSignedIn } = useAuth();
 
   return (
     <div className="h-screen min-w-[300px] border-r-[1px]">
@@ -38,18 +40,22 @@ export default function SideBar() {
           isActive={pathName === "/"}
           icon={<Plus size="20" />}
         />
-        <TabLink
-          href={"/collections"}
-          label="Collections (soon)"
-          isActive={pathName === "/collections"}
-          icon={<Boxes size="20" />}
-        />
-        <TabLink
-          href={"/environments"}
-          label="Environments (soon)"
-          isActive={pathName === "/environments"}
-          icon={<Container size="20" />}
-        />
+        {isSignedIn && (
+          <>
+            <TabLink
+              href={"/collections"}
+              label="Collections (soon)"
+              isActive={pathName === "/collections"}
+              icon={<Boxes size="20" />}
+            />
+            <TabLink
+              href={"/environments"}
+              label="Environments (soon)"
+              isActive={pathName === "/environments"}
+              icon={<Container size="20" />}
+            />
+          </>
+        )}
       </div>
     </div>
   );
