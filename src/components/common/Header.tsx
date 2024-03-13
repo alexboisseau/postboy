@@ -4,7 +4,7 @@ import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { Button } from "@components/ui/button";
 import { Skeleton } from "@components/ui/skeleton";
-import { UserButton } from "@clerk/nextjs";
+import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
 
 export default function Header() {
@@ -36,17 +36,24 @@ export default function Header() {
               <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             </Button>
           )}
-          <UserButton
-            appearance={{
-              baseTheme: theme === "dark" ? dark : undefined,
-            }}
-            userProfileProps={{
-              appearance: {
+          <SignedIn>
+            <UserButton
+              appearance={{
                 baseTheme: theme === "dark" ? dark : undefined,
-              },
-            }}
-            afterSignOutUrl="/"
-          />
+              }}
+              userProfileProps={{
+                appearance: {
+                  baseTheme: theme === "dark" ? dark : undefined,
+                },
+              }}
+              afterSignOutUrl="/"
+            />
+          </SignedIn>
+          <SignedOut>
+            <SignInButton>
+              <Button variant="outline">Sign In</Button>
+            </SignInButton>
+          </SignedOut>
         </>
       ) : (
         <>
