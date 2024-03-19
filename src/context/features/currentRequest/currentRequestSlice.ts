@@ -6,56 +6,17 @@ import { HttpResponse } from "@core/types/http-response";
 import {
   AuthorizationType,
   ContentType,
-  CurrentRequestState,
   RequestErrors,
   SupportedRawLanguages,
 } from "./types";
-import generateUrlWithQueryParameters from "./generateUrlWithQueryParameters";
-import getContentTypeHeader from "./getContentTypeHeader";
+import generateUrlWithQueryParameters from "./utils/generateUrlWithQueryParameters";
+import getContentTypeHeader from "./utils/getContentTypeHeader";
 import { AppDispatch, AppGetState } from "@context/store";
 import { sendHttpRequest } from "@server-actions/send-http-request";
-import validateCurrentRequest from "./validateCurrentRequest";
-import extractBodyFromCurrentRequest from "./extractBodyFromCurrentRequest";
-
-const initialState: CurrentRequestState = {
-  fields: {
-    httpMethod: "GET",
-    url: "",
-    queryParameters: [],
-    headers: [],
-    authorization: {
-      type: "no-auth",
-      apiKey: {
-        key: "",
-        value: "",
-      },
-      basic: {
-        username: "",
-        password: "",
-      },
-      bearerToken: {
-        token: "",
-      },
-    },
-    body: {
-      contentType: "none",
-      raw: {
-        language: "json",
-        value: "",
-      },
-      xWwwFormUrlencoded: [],
-    },
-  },
-  errors: {
-    httpMethod: null,
-    url: null,
-  },
-  isSubmitting: false,
-  response: {
-    value: null,
-    error: null,
-  },
-};
+import validateCurrentRequest from "./utils/validateCurrentRequest";
+import extractBodyFromCurrentRequest from "./utils/extractBodyFromCurrentRequest";
+import { initialState } from "./initialState";
+import updateUrlAction from "./actions/updateUrl";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -93,25 +54,7 @@ export const currentRequestSlice = createSlice({
       state.fields.httpMethod = action.payload;
     },
     updateUrl: (state, action: PayloadAction<string>) => {
-      const url = action.payload;
-      const queryParameters: QueryParameter[] =
-        state.fields.queryParameters.filter((qp) => qp.active === false);
-      const queryParametersString = url.split("?")[1];
-
-      if (queryParametersString !== undefined) {
-        const urlSearchParams = new URLSearchParams(queryParametersString);
-        const activeParameters = Array.from(urlSearchParams).map(
-          ([key, value]) => {
-            return {
-              key,
-              value,
-              active: true,
-            };
-          }
-        );
-        queryParameters.push(...activeParameters);
-      }
-
+      const { url, queryParameters } = updateUrlAction(state, action.payload);
       state.fields.url = url;
       state.fields.queryParameters = queryParameters;
     },

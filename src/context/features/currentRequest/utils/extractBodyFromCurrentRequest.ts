@@ -1,4 +1,4 @@
-import { CurrentRequestState } from "./types";
+import { CurrentRequestState } from "../types";
 
 export default function extractBodyFromCurrentRequest(
   request: CurrentRequestState

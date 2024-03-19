@@ -1,4 +1,4 @@
-import { ContentType, CurrentRequestState } from "./types";
+import { ContentType, CurrentRequestState } from "../types";
 
 export default function getContentTypeHeader(
   contentType: ContentType,

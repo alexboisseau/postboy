@@ -1,5 +1,5 @@
 import { HttpMethods } from "@core/types/http-method";
-import { CurrentRequestState, RequestErrors } from "./types";
+import { CurrentRequestState, RequestErrors } from "../types";
 import { z } from "zod";
 
 export default function validateCurrentRequest(
