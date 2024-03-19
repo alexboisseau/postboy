@@ -1,17 +1,16 @@
 import { QueryParameter } from "@core/types/http-request";
 import { CurrentRequestState } from "../types";
+import { PayloadAction } from "@reduxjs/toolkit";
 
 export default function updateUrl(
   state: CurrentRequestState,
-  url: string
-): {
-  url: string;
-  queryParameters: QueryParameter[];
-} {
+  action: PayloadAction<string>
+): CurrentRequestState {
+  const url = action.payload;
   const disabledQueryParameters = state.fields.queryParameters.filter(
     (qp) => qp.active === false
   );
-  const queryParametersString = url.split("?")[1];
+  const queryParametersString = action.payload.split("?")[1];
 
   const queryParameters: QueryParameter[] = disabledQueryParameters;
   if (queryParametersString !== undefined) {
@@ -27,7 +26,11 @@ export default function updateUrl(
   }
 
   return {
-    url,
-    queryParameters,
+    ...state,
+    fields: {
+      ...state.fields,
+      url,
+      queryParameters,
+    },
   };
 }

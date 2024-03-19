@@ -1,9 +1,13 @@
 import { CurrentRequestState } from "../types";
+import createInitialState from "../utils/createInitialState";
 import updateUrl from "./updateUrl";
-import { initialState } from "../initialState";
 
 describe("updateUrl", () => {
-  const state: CurrentRequestState = { ...initialState };
+  let state: CurrentRequestState;
+
+  beforeEach(() => {
+    state = createInitialState();
+  });
 
   it("should update the URL and query parameters correctly", () => {
     state.fields.queryParameters = [
@@ -18,12 +22,14 @@ describe("updateUrl", () => {
       { key: "param4", value: "value4", active: true },
     ];
 
-    const { url, queryParameters } = updateUrl(
-      state,
-      "https://example.com/test?param3=value3&param4=value4"
-    );
+    const action = {
+      payload: "https://example.com/test?param3=value3&param4=value4",
+      type: "currentRequest/updateUrl",
+    };
 
-    expect(url).toEqual(expectedUrl);
-    expect(queryParameters).toEqual(expectedQueryParameters);
+    const newState = updateUrl(state, action);
+
+    expect(newState.fields.url).toEqual(expectedUrl);
+    expect(newState.fields.queryParameters).toEqual(expectedQueryParameters);
   });
 });
