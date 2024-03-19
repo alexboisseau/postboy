@@ -15,8 +15,8 @@ import { AppDispatch, AppGetState } from "@context/store";
 import { sendHttpRequest } from "@server-actions/send-http-request";
 import validateCurrentRequest from "./utils/validateCurrentRequest";
 import extractBodyFromCurrentRequest from "./utils/extractBodyFromCurrentRequest";
-import { initialState } from "./initialState";
 import updateUrlAction from "./actions/updateUrl";
+import createInitialState from "./utils/createInitialState";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -46,6 +46,8 @@ export const submitCurrentRequest =
     }
   };
 
+const initialState = createInitialState();
+
 export const currentRequestSlice = createSlice({
   name: "currentRequest",
   initialState,
@@ -53,11 +55,7 @@ export const currentRequestSlice = createSlice({
     updateHttpMethod: (state, action: PayloadAction<HttpMethod>) => {
       state.fields.httpMethod = action.payload;
     },
-    updateUrl: (state, action: PayloadAction<string>) => {
-      const { url, queryParameters } = updateUrlAction(state, action.payload);
-      state.fields.url = url;
-      state.fields.queryParameters = queryParameters;
-    },
+    updateUrl: updateUrlAction,
     addQueryParameter: (state) => {
       const updatedQueryParameters = [
         ...state.fields.queryParameters,
