@@ -16,6 +16,7 @@ import { sendHttpRequest } from "@server-actions/send-http-request";
 import validateCurrentRequest from "./utils/validateCurrentRequest";
 import extractBodyFromCurrentRequest from "./utils/extractBodyFromCurrentRequest";
 import updateUrlAction from "./actions/updateUrl";
+import addQueryParameterAction from "./actions/addQueryParameter";
 import createInitialState from "./utils/createInitialState";
 
 export const submitCurrentRequest =
@@ -56,22 +57,7 @@ export const currentRequestSlice = createSlice({
       state.fields.httpMethod = action.payload;
     },
     updateUrl: updateUrlAction,
-    addQueryParameter: (state) => {
-      const updatedQueryParameters = [
-        ...state.fields.queryParameters,
-        {
-          key: "",
-          value: "",
-          active: true,
-        },
-      ];
-
-      state.fields.queryParameters = updatedQueryParameters;
-      state.fields.url = generateUrlWithQueryParameters(
-        state.fields.url,
-        updatedQueryParameters
-      );
-    },
+    addQueryParameter: addQueryParameterAction,
     updateQueryParameter: (
       state,
       action: PayloadAction<{

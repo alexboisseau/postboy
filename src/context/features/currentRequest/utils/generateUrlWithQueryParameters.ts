@@ -1,24 +1,26 @@
 import { QueryParameter } from "@core/types/http-request";
 
 export default function generateUrlWithQueryParameters(
-  url: string,
-  queryParameters: QueryParameter[]
+  inputUrl: string,
+  inputQueryParameters: QueryParameter[]
 ) {
+  const queryParameters = inputQueryParameters.filter(
+    (param) => param.key.trim() !== "" && param.active
+  );
+
+  if (queryParameters.length === 0) return inputUrl;
+
   const urlSearchParams = new URLSearchParams();
   queryParameters.forEach((param) => {
-    if (param.active === true) {
-      urlSearchParams.append(param.key, param.value);
-    }
+    urlSearchParams.append(param.key, param.value);
   });
 
   try {
-    const urlObject = new URL(url);
+    const urlObject = new URL(inputUrl);
     urlObject.search = urlSearchParams.toString();
-    url = urlObject.toString();
+    return urlObject.toString();
   } catch {
-    const urlBase = url.split("?")[0];
-    url = urlBase + "?" + urlSearchParams.toString();
+    const urlBase = inputUrl.split("?")[0];
+    return `${urlBase}?${urlSearchParams.toString()}`;
   }
-
-  return url;
 }
