@@ -8,8 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "prepare": "husky",
-    "test": "jest",
-    "test:watch": "jest --watch-all"
+    "test": "jest --maxWorkers=1",
+    "test:watch": "jest --watch-all --maxWorkers=1"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.9",
