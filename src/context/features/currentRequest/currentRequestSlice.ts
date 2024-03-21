@@ -23,6 +23,7 @@ import updateQueryParameterReducer from "./reducers/queryParameters/updateQueryP
 import removeQueryParameterReducer from "./reducers/queryParameters/removeQueryParameter";
 import toggleAllQueryParametersReducer from "./reducers/queryParameters/toggleAllQueryParameters";
 import addHeaderReducer from "./reducers/headers/addHeader";
+import removeHeaderReducer from "./reducers/headers/removeHeader";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -67,11 +68,7 @@ export const currentRequestSlice = createSlice({
     removeQueryParameter: removeQueryParameterReducer,
     toggleAllQueryParameters: toggleAllQueryParametersReducer,
     addHeader: addHeaderReducer,
-    removeHeader: (state, action: PayloadAction<number>) => {
-      state.fields.headers = state.fields.headers.filter(
-        (_, index) => index !== action.payload
-      );
-    },
+    removeHeader: removeHeaderReducer,
     updateHeader: (
       state,
       action: PayloadAction<{ header: Header; index: number }>
