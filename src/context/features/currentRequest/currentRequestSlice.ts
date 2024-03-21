@@ -17,10 +17,10 @@ import validateCurrentRequest from "./utils/validateCurrentRequest";
 import extractBodyFromCurrentRequest from "./utils/extractBodyFromCurrentRequest";
 import createInitialState from "./utils/createInitialState";
 
-/** ACTIONS */
-import updateUrlAction from "./actions/updateUrl";
-import addQueryParameterAction from "./actions/addQueryParameter";
-import updateQueryParameterAction from "./actions/updateQueryParameter";
+/** REDUCERS */
+import updateUrlReducer from "./reducers/updateUrl";
+import addQueryParameterReducer from "./reducers/addQueryParameter";
+import updateQueryParameterReducer from "./reducers/updateQueryParameter";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -59,9 +59,9 @@ export const currentRequestSlice = createSlice({
     updateHttpMethod: (state, action: PayloadAction<HttpMethod>) => {
       state.fields.httpMethod = action.payload;
     },
-    updateUrl: updateUrlAction,
-    addQueryParameter: addQueryParameterAction,
-    updateQueryParameter: updateQueryParameterAction,
+    updateUrl: updateUrlReducer,
+    addQueryParameter: addQueryParameterReducer,
+    updateQueryParameter: updateQueryParameterReducer,
     removeQueryParameter: (state, action: PayloadAction<number>) => {
       const updatedQueryParameters = state.fields.queryParameters.filter(
         (_, index) => index !== action.payload
