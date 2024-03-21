@@ -21,6 +21,7 @@ import createInitialState from "./utils/createInitialState";
 import updateUrlReducer from "./reducers/updateUrl";
 import addQueryParameterReducer from "./reducers/addQueryParameter";
 import updateQueryParameterReducer from "./reducers/updateQueryParameter";
+import removeQueryParameterReducer from "./reducers/removeQueryParameter";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -62,17 +63,7 @@ export const currentRequestSlice = createSlice({
     updateUrl: updateUrlReducer,
     addQueryParameter: addQueryParameterReducer,
     updateQueryParameter: updateQueryParameterReducer,
-    removeQueryParameter: (state, action: PayloadAction<number>) => {
-      const updatedQueryParameters = state.fields.queryParameters.filter(
-        (_, index) => index !== action.payload
-      );
-
-      state.fields.queryParameters = updatedQueryParameters;
-      state.fields.url = generateUrlWithQueryParameters(
-        state.fields.url,
-        updatedQueryParameters
-      );
-    },
+    removeQueryParameter: removeQueryParameterReducer,
     checkAllQueryParameters: (state, action: PayloadAction<boolean>) => {
       const updatedQueryParameters = state.fields.queryParameters.map(
         (param) => {
