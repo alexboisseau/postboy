@@ -64,7 +64,7 @@ export const currentRequestSlice = createSlice({
     addQueryParameter: addQueryParameterReducer,
     updateQueryParameter: updateQueryParameterReducer,
     removeQueryParameter: removeQueryParameterReducer,
-    checkAllQueryParameters: (state, action: PayloadAction<boolean>) => {
+    toggleAllQueryParameters: (state, action: PayloadAction<boolean>) => {
       const updatedQueryParameters = state.fields.queryParameters.map(
         (param) => {
           return { ...param, active: action.payload };
@@ -334,7 +334,7 @@ export const {
   addQueryParameter,
   updateQueryParameter,
   removeQueryParameter,
-  checkAllQueryParameters,
+  toggleAllQueryParameters,
   addHeader,
   removeHeader,
   updateHeader,
