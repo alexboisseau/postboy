@@ -2,12 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import { HttpMethod } from "@core/types/http-method";
 import { HttpResponse } from "@core/types/http-response";
-import {
-  AuthorizationType,
-  ContentType,
-  RequestErrors,
-  SupportedRawLanguages,
-} from "./types";
+import { ContentType, RequestErrors, SupportedRawLanguages } from "./types";
 import getContentTypeHeader from "./utils/getContentTypeHeader";
 import { AppDispatch, AppGetState } from "@context/store";
 import { sendHttpRequest } from "@server-actions/send-http-request";
@@ -25,6 +20,7 @@ import addHeaderReducer from "./reducers/headers/addHeader";
 import removeHeaderReducer from "./reducers/headers/removeHeader";
 import updateHeaderReducer from "./reducers/headers/updateHeader";
 import toggleAllHeadersReducer from "./reducers/headers/toggleAllHeaders";
+import updateAuthorizationTypeReducer from "./reducers/authorization/updateAuthorizationType";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -72,40 +68,8 @@ export const currentRequestSlice = createSlice({
     removeHeader: removeHeaderReducer,
     updateHeader: updateHeaderReducer,
     toggleAllHeaders: toggleAllHeadersReducer,
-    updateAuthorizationType: (
-      state,
-      action: PayloadAction<AuthorizationType>
-    ) => {
-      state.fields.headers = state.fields.headers.filter(
-        (header) => header.key !== "Authorization"
-      );
-
-      if (state.fields.authorization.type === "api-key") {
-        console.log("here");
-        state.fields.headers = state.fields.headers.filter(
-          (header) => header.key !== state.fields.authorization.apiKey.key
-        );
-      }
-
-      const headerValue = (() => {
-        if (action.payload === "basic") {
-          return `Basic ${btoa(
-            `${state.fields.authorization.basic.username}:${state.fields.authorization.basic.password}`
-          )}`;
-        } else if (action.payload === "bearer-token") {
-          return `Bearer ${state.fields.authorization.bearerToken.token}`;
-        }
-        return "";
-      })();
-
-      state.fields.headers.push({
-        key: "Authorization",
-        value: headerValue,
-        active: true,
-      });
-
-      state.fields.authorization.type = action.payload;
-    },
+    // AUTHORIZATION
+    updateAuthorizationType: updateAuthorizationTypeReducer,
     updateAuthorizationBasicUsername: (
       state,
       action: PayloadAction<string>
@@ -185,6 +149,8 @@ export const currentRequestSlice = createSlice({
 
       state.fields.authorization.apiKey.value = action.payload;
     },
+
+    // BODY
     updateBodyContentType: (state, action: PayloadAction<ContentType>) => {
       state.fields.headers = state.fields.headers.filter(
         (header) => header.key !== "Content-Type"
