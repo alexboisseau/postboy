@@ -8,7 +8,9 @@ export default function generateUrlWithQueryParameters(
     (param) => param.key.trim() !== "" && param.active
   );
 
-  if (queryParameters.length === 0) return inputUrl;
+  if (queryParameters.length === 0) {
+    return inputUrl.split("?")[0];
+  }
 
   const urlSearchParams = new URLSearchParams();
   queryParameters.forEach((param) => {
