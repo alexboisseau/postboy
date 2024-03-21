@@ -32,4 +32,26 @@ describe("updateUrl", () => {
     expect(newState.fields.url).toEqual(expectedUrl);
     expect(newState.fields.queryParameters).toEqual(expectedQueryParameters);
   });
+
+  it("should kept only disabled query parameters when url does not have query parameters", () => {
+    state.fields.queryParameters = [
+      { key: "param1", value: "value1", active: true },
+      { key: "param2", value: "value2", active: false },
+    ];
+
+    const expectedUrl = "https://example.com";
+    const expectedQueryParameters = [
+      { key: "param2", value: "value2", active: false },
+    ];
+
+    const action = {
+      payload: "https://example.com",
+      type: "currentRequest/updateUrl",
+    };
+
+    const newState = updateUrl(state, action);
+
+    expect(newState.fields.url).toEqual(expectedUrl);
+    expect(newState.fields.queryParameters).toEqual(expectedQueryParameters);
+  });
 });

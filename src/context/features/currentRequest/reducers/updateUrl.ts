@@ -12,18 +12,25 @@ export default function updateUrl(
   );
   const queryParametersString = action.payload.split("?")[1];
 
-  const queryParameters: QueryParameter[] = disabledQueryParameters;
-  if (queryParametersString !== undefined) {
-    const urlSearchParams = new URLSearchParams(queryParametersString);
-    const activeParameters = Array.from(urlSearchParams).map(
-      ([key, value]) => ({
-        key,
-        value,
-        active: true,
-      })
-    );
-    queryParameters.push(...activeParameters);
+  if (!queryParametersString) {
+    return {
+      ...state,
+      fields: {
+        ...state.fields,
+        url,
+        queryParameters: disabledQueryParameters,
+      },
+    };
   }
+
+  const queryParameters: QueryParameter[] = disabledQueryParameters;
+  const urlSearchParams = new URLSearchParams(queryParametersString);
+  const activeParameters = Array.from(urlSearchParams).map(([key, value]) => ({
+    key,
+    value,
+    active: true,
+  }));
+  queryParameters.push(...activeParameters);
 
   return {
     ...state,
