@@ -9,7 +9,6 @@ import {
   RequestErrors,
   SupportedRawLanguages,
 } from "./types";
-import generateUrlWithQueryParameters from "./utils/generateUrlWithQueryParameters";
 import getContentTypeHeader from "./utils/getContentTypeHeader";
 import { AppDispatch, AppGetState } from "@context/store";
 import { sendHttpRequest } from "@server-actions/send-http-request";
@@ -22,6 +21,7 @@ import updateUrlReducer from "./reducers/updateUrl";
 import addQueryParameterReducer from "./reducers/addQueryParameter";
 import updateQueryParameterReducer from "./reducers/updateQueryParameter";
 import removeQueryParameterReducer from "./reducers/removeQueryParameter";
+import toggleAllQueryParametersReducer from "./reducers/toggleAllQueryParameters";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -64,19 +64,7 @@ export const currentRequestSlice = createSlice({
     addQueryParameter: addQueryParameterReducer,
     updateQueryParameter: updateQueryParameterReducer,
     removeQueryParameter: removeQueryParameterReducer,
-    toggleAllQueryParameters: (state, action: PayloadAction<boolean>) => {
-      const updatedQueryParameters = state.fields.queryParameters.map(
-        (param) => {
-          return { ...param, active: action.payload };
-        }
-      );
-
-      state.fields.queryParameters = updatedQueryParameters;
-      state.fields.url = generateUrlWithQueryParameters(
-        state.fields.url,
-        updatedQueryParameters
-      );
-    },
+    toggleAllQueryParameters: toggleAllQueryParametersReducer,
     addHeader: (state) => {
       state.fields.headers.push({
         key: "",
