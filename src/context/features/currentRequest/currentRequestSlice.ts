@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import { HttpMethod } from "@core/types/http-method";
-import { Header } from "@core/types/http-request";
 import { HttpResponse } from "@core/types/http-response";
 import {
   AuthorizationType,
@@ -24,6 +23,7 @@ import removeQueryParameterReducer from "./reducers/queryParameters/removeQueryP
 import toggleAllQueryParametersReducer from "./reducers/queryParameters/toggleAllQueryParameters";
 import addHeaderReducer from "./reducers/headers/addHeader";
 import removeHeaderReducer from "./reducers/headers/removeHeader";
+import updateHeaderReducer from "./reducers/headers/updateHeader";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -69,17 +69,7 @@ export const currentRequestSlice = createSlice({
     toggleAllQueryParameters: toggleAllQueryParametersReducer,
     addHeader: addHeaderReducer,
     removeHeader: removeHeaderReducer,
-    updateHeader: (
-      state,
-      action: PayloadAction<{ header: Header; index: number }>
-    ) => {
-      state.fields.headers = state.fields.headers.map((header, index) => {
-        if (index === action.payload.index) {
-          return action.payload.header;
-        }
-        return header;
-      });
-    },
+    updateHeader: updateHeaderReducer,
     checkAllHeaders: (state, action: PayloadAction<boolean>) => {
       state.fields.headers = state.fields.headers.map((header) => {
         return { ...header, active: action.payload };
