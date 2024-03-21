@@ -1,7 +1,7 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { CurrentRequestState } from "../types";
+import { CurrentRequestState } from "../../types";
 import { QueryParameter } from "@core/types/http-request";
-import generateUrlWithQueryParameters from "../utils/generateUrlWithQueryParameters";
+import generateUrlWithQueryParameters from "../../utils/generateUrlWithQueryParameters";
 
 export default function updateQueryParameter(
   state: CurrentRequestState,

@@ -1,5 +1,5 @@
-import { CurrentRequestState } from "../types";
-import createInitialState from "../utils/createInitialState";
+import { CurrentRequestState } from "../../types";
+import createInitialState from "../../utils/createInitialState";
 import addQueryParameter from "./addQueryParameter";
 
 const NEW_QUERY_PARAMETER = { key: "", value: "", active: true };

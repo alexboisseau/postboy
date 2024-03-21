@@ -1,6 +1,6 @@
 import { QueryParameter } from "@core/types/http-request";
-import { CurrentRequestState } from "../types";
-import createInitialState from "../utils/createInitialState";
+import { CurrentRequestState } from "../../types";
+import createInitialState from "../../utils/createInitialState";
 import updateQueryParameter from "./updateQueryParameter";
 
 const generateActionPayload = (

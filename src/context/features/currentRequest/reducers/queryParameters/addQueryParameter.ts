@@ -1,5 +1,5 @@
-import { CurrentRequestState } from "../types";
-import generateUrlWithQueryParameters from "../utils/generateUrlWithQueryParameters";
+import { CurrentRequestState } from "../../types";
+import generateUrlWithQueryParameters from "../../utils/generateUrlWithQueryParameters";
 
 export default function addQueryParameter(
   state: CurrentRequestState

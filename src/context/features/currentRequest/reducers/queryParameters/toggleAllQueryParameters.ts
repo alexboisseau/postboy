@@ -1,6 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import { CurrentRequestState } from "../types";
-import generateUrlWithQueryParameters from "../utils/generateUrlWithQueryParameters";
+import { CurrentRequestState } from "../../types";
+import generateUrlWithQueryParameters from "../../utils/generateUrlWithQueryParameters";
 
 export default function toggleAllQueryParameters(
   state: CurrentRequestState,

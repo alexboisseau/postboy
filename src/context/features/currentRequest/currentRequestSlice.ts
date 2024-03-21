@@ -18,10 +18,10 @@ import createInitialState from "./utils/createInitialState";
 
 /** REDUCERS */
 import updateUrlReducer from "./reducers/updateUrl";
-import addQueryParameterReducer from "./reducers/addQueryParameter";
-import updateQueryParameterReducer from "./reducers/updateQueryParameter";
-import removeQueryParameterReducer from "./reducers/removeQueryParameter";
-import toggleAllQueryParametersReducer from "./reducers/toggleAllQueryParameters";
+import addQueryParameterReducer from "./reducers/queryParameters/addQueryParameter";
+import updateQueryParameterReducer from "./reducers/queryParameters/updateQueryParameter";
+import removeQueryParameterReducer from "./reducers/queryParameters/removeQueryParameter";
+import toggleAllQueryParametersReducer from "./reducers/queryParameters/toggleAllQueryParameters";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {

@@ -1,5 +1,5 @@
-import { CurrentRequestState } from "../types";
-import createInitialState from "../utils/createInitialState";
+import { CurrentRequestState } from "../../types";
+import createInitialState from "../../utils/createInitialState";
 import toggleAllQueryParameters from "./toggleAllQueryParameters";
 
 const generateActionPayload = (active: boolean) => ({
