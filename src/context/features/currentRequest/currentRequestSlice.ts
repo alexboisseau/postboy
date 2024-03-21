@@ -24,6 +24,7 @@ import toggleAllQueryParametersReducer from "./reducers/queryParameters/toggleAl
 import addHeaderReducer from "./reducers/headers/addHeader";
 import removeHeaderReducer from "./reducers/headers/removeHeader";
 import updateHeaderReducer from "./reducers/headers/updateHeader";
+import toggleAllHeadersReducer from "./reducers/headers/toggleAllHeaders";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -70,11 +71,7 @@ export const currentRequestSlice = createSlice({
     addHeader: addHeaderReducer,
     removeHeader: removeHeaderReducer,
     updateHeader: updateHeaderReducer,
-    toggleAllHeaders: (state, action: PayloadAction<boolean>) => {
-      state.fields.headers = state.fields.headers.map((header) => {
-        return { ...header, active: action.payload };
-      });
-    },
+    toggleAllHeaders: toggleAllHeadersReducer,
     updateAuthorizationType: (
       state,
       action: PayloadAction<AuthorizationType>
