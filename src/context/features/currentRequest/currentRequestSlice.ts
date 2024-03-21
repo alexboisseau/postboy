@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import { HttpMethod } from "@core/types/http-method";
-import { Header, QueryParameter } from "@core/types/http-request";
+import { Header } from "@core/types/http-request";
 import { HttpResponse } from "@core/types/http-response";
 import {
   AuthorizationType,
@@ -15,9 +15,12 @@ import { AppDispatch, AppGetState } from "@context/store";
 import { sendHttpRequest } from "@server-actions/send-http-request";
 import validateCurrentRequest from "./utils/validateCurrentRequest";
 import extractBodyFromCurrentRequest from "./utils/extractBodyFromCurrentRequest";
+import createInitialState from "./utils/createInitialState";
+
+/** ACTIONS */
 import updateUrlAction from "./actions/updateUrl";
 import addQueryParameterAction from "./actions/addQueryParameter";
-import createInitialState from "./utils/createInitialState";
+import updateQueryParameterAction from "./actions/updateQueryParameter";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -58,24 +61,7 @@ export const currentRequestSlice = createSlice({
     },
     updateUrl: updateUrlAction,
     addQueryParameter: addQueryParameterAction,
-    updateQueryParameter: (
-      state,
-      action: PayloadAction<{
-        queryParameter: QueryParameter;
-        index: number;
-      }>
-    ) => {
-      const updatedQueryParameters = state.fields.queryParameters.map(
-        (param, index) =>
-          index === action.payload.index ? action.payload.queryParameter : param
-      );
-
-      state.fields.queryParameters = updatedQueryParameters;
-      state.fields.url = generateUrlWithQueryParameters(
-        state.fields.url,
-        updatedQueryParameters
-      );
-    },
+    updateQueryParameter: updateQueryParameterAction,
     removeQueryParameter: (state, action: PayloadAction<number>) => {
       const updatedQueryParameters = state.fields.queryParameters.filter(
         (_, index) => index !== action.payload
