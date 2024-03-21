@@ -70,7 +70,7 @@ export const currentRequestSlice = createSlice({
     addHeader: addHeaderReducer,
     removeHeader: removeHeaderReducer,
     updateHeader: updateHeaderReducer,
-    checkAllHeaders: (state, action: PayloadAction<boolean>) => {
+    toggleAllHeaders: (state, action: PayloadAction<boolean>) => {
       state.fields.headers = state.fields.headers.map((header) => {
         return { ...header, active: action.payload };
       });
@@ -308,7 +308,7 @@ export const {
   addHeader,
   removeHeader,
   updateHeader,
-  checkAllHeaders,
+  toggleAllHeaders,
   updateAuthorizationType,
   updateAuthorizationBasicUsername,
   updateAuthorizationBasicPassword,
