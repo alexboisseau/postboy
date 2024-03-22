@@ -11,19 +11,7 @@ import extractBodyFromCurrentRequest from "./utils/extractBodyFromCurrentRequest
 import createInitialState from "./utils/createInitialState";
 
 /** REDUCERS */
-import updateUrlReducer from "./reducers/updateUrl";
-import addQueryParameterReducer from "./reducers/queryParameters/addQueryParameter";
-import updateQueryParameterReducer from "./reducers/queryParameters/updateQueryParameter";
-import removeQueryParameterReducer from "./reducers/queryParameters/removeQueryParameter";
-import toggleAllQueryParametersReducer from "./reducers/queryParameters/toggleAllQueryParameters";
-import addHeaderReducer from "./reducers/headers/addHeader";
-import removeHeaderReducer from "./reducers/headers/removeHeader";
-import updateHeaderReducer from "./reducers/headers/updateHeader";
-import toggleAllHeadersReducer from "./reducers/headers/toggleAllHeaders";
-import updateAuthorizationTypeReducer from "./reducers/authorization/updateAuthorizationType";
-import updateAuthorizationBasicReducer from "./reducers/authorization/updateAuthorizationBasic";
-import updateAuthorizationBearerTokenReducer from "./reducers/authorization/updateAuthorizationBearerToken";
-import updateAuthorizationApiKeyReducer from "./reducers/authorization/updateAuthorizationApiKey";
+import reducers from "./reducers";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -59,23 +47,10 @@ export const currentRequestSlice = createSlice({
   name: "currentRequest",
   initialState,
   reducers: {
+    ...reducers,
     updateHttpMethod: (state, action: PayloadAction<HttpMethod>) => {
       state.fields.httpMethod = action.payload;
     },
-    updateUrl: updateUrlReducer,
-    addQueryParameter: addQueryParameterReducer,
-    updateQueryParameter: updateQueryParameterReducer,
-    removeQueryParameter: removeQueryParameterReducer,
-    toggleAllQueryParameters: toggleAllQueryParametersReducer,
-    addHeader: addHeaderReducer,
-    removeHeader: removeHeaderReducer,
-    updateHeader: updateHeaderReducer,
-    toggleAllHeaders: toggleAllHeadersReducer,
-    // AUTHORIZATION
-    updateAuthorizationType: updateAuthorizationTypeReducer,
-    updateAuthorizationBasic: updateAuthorizationBasicReducer,
-    updateAuthorizationBearerToken: updateAuthorizationBearerTokenReducer,
-    updateAuthorizationApiKey: updateAuthorizationApiKeyReducer,
     // BODY
     updateBodyContentType: (state, action: PayloadAction<ContentType>) => {
       state.fields.headers = state.fields.headers.filter(
