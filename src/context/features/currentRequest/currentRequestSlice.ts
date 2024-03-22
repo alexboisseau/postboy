@@ -23,6 +23,7 @@ import toggleAllHeadersReducer from "./reducers/headers/toggleAllHeaders";
 import updateAuthorizationTypeReducer from "./reducers/authorization/updateAuthorizationType";
 import updateAuthorizationBasicReducer from "./reducers/authorization/updateAuthorizationBasic";
 import updateAuthorizationBearerTokenReducer from "./reducers/authorization/updateAuthorizationBearerToken";
+import updateAuthorizationApiKeyReducer from "./reducers/authorization/updateAuthorizationApiKey";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -74,37 +75,7 @@ export const currentRequestSlice = createSlice({
     updateAuthorizationType: updateAuthorizationTypeReducer,
     updateAuthorizationBasic: updateAuthorizationBasicReducer,
     updateAuthorizationBearerToken: updateAuthorizationBearerTokenReducer,
-    updateAuthorizationApiKeyKey: (state, action: PayloadAction<string>) => {
-      const lastKeyValue = state.fields.authorization.apiKey.key;
-      state.fields.headers = state.fields.headers.filter(
-        (header) =>
-          header.key !== "Authorization" && header.key !== lastKeyValue
-      );
-
-      state.fields.headers.push({
-        key: action.payload,
-        value: state.fields.authorization.apiKey.value,
-        active: true,
-      });
-
-      state.fields.authorization.apiKey.key = action.payload;
-    },
-    updateAuthorizationApiKeyValue: (state, action: PayloadAction<string>) => {
-      const lastKeyValue = state.fields.authorization.apiKey.key;
-      state.fields.headers = state.fields.headers.filter(
-        (header) =>
-          header.key !== "Authorization" && header.key !== lastKeyValue
-      );
-
-      state.fields.headers.push({
-        key: lastKeyValue,
-        value: action.payload,
-        active: true,
-      });
-
-      state.fields.authorization.apiKey.value = action.payload;
-    },
-
+    updateAuthorizationApiKey: updateAuthorizationApiKeyReducer,
     // BODY
     updateBodyContentType: (state, action: PayloadAction<ContentType>) => {
       state.fields.headers = state.fields.headers.filter(
@@ -230,8 +201,7 @@ export const {
   updateAuthorizationType,
   updateAuthorizationBasic,
   updateAuthorizationBearerToken,
-  updateAuthorizationApiKeyKey,
-  updateAuthorizationApiKeyValue,
+  updateAuthorizationApiKey,
   updateBodyContentType,
   updateBodyRawLanguage,
   updateBodyRawValue,
