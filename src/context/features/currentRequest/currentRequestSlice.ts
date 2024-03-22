@@ -22,6 +22,7 @@ import updateHeaderReducer from "./reducers/headers/updateHeader";
 import toggleAllHeadersReducer from "./reducers/headers/toggleAllHeaders";
 import updateAuthorizationTypeReducer from "./reducers/authorization/updateAuthorizationType";
 import updateAuthorizationBasicReducer from "./reducers/authorization/updateAuthorizationBasic";
+import updateAuthorizationBearerTokenReducer from "./reducers/authorization/updateAuthorizationBearerToken";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -72,19 +73,7 @@ export const currentRequestSlice = createSlice({
     // AUTHORIZATION
     updateAuthorizationType: updateAuthorizationTypeReducer,
     updateAuthorizationBasic: updateAuthorizationBasicReducer,
-    updateAuthorizationBearerToken: (state, action: PayloadAction<string>) => {
-      state.fields.headers = state.fields.headers.filter(
-        (header) => header.key !== "Authorization"
-      );
-
-      state.fields.headers.push({
-        key: "Authorization",
-        value: `Bearer ${action.payload}`,
-        active: true,
-      });
-
-      state.fields.authorization.bearerToken.token = action.payload;
-    },
+    updateAuthorizationBearerToken: updateAuthorizationBearerTokenReducer,
     updateAuthorizationApiKeyKey: (state, action: PayloadAction<string>) => {
       const lastKeyValue = state.fields.authorization.apiKey.key;
       state.fields.headers = state.fields.headers.filter(
