@@ -36,6 +36,11 @@ function generateAuthorizationHeaderValue(
   }
 }
 
+function headerMustBeAdded(type: AuthorizationType): boolean {
+  const supportedAuthTypes = ["basic", "bearer-token", "api-key"];
+  return supportedAuthTypes.includes(type);
+}
+
 export default function updateAuthorizationType(
   state: CurrentRequestState,
   action: PayloadAction<AuthorizationType>
@@ -47,8 +52,11 @@ export default function updateAuthorizationType(
       h.key !== state.fields.authorization.apiKey.key
   );
 
-  updatedHeaders.push(generateAuthorizationHeaderValue(state, action.payload));
-
+  if (headerMustBeAdded(action.payload)) {
+    updatedHeaders.push(
+      generateAuthorizationHeaderValue(state, action.payload)
+    );
+  }
   return {
     ...state,
     fields: {
