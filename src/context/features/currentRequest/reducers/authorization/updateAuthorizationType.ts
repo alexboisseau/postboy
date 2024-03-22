@@ -1,45 +1,5 @@
 import { PayloadAction } from "@reduxjs/toolkit";
 import { AuthorizationType, CurrentRequestState } from "../../types";
-import { Header } from "@core/types/http-request";
-
-function generateAuthorizationHeaderValue(
-  state: CurrentRequestState,
-  type: AuthorizationType
-): Header {
-  switch (type) {
-    case "basic":
-      return {
-        key: "Authorization",
-        value: `Basic ${btoa(
-          `${state.fields.authorization.basic.username}:${state.fields.authorization.basic.password}`
-        )}`,
-        active: true,
-      };
-    case "bearer-token":
-      return {
-        key: "Authorization",
-        value: `Bearer ${state.fields.authorization.bearerToken.token}`,
-        active: true,
-      };
-    case "api-key":
-      return {
-        key: state.fields.authorization.apiKey.key,
-        value: state.fields.authorization.apiKey.value,
-        active: true,
-      };
-    default:
-      return {
-        key: "Authorization",
-        value: "",
-        active: true,
-      };
-  }
-}
-
-function headerMustBeAdded(type: AuthorizationType): boolean {
-  const supportedAuthTypes = ["basic", "bearer-token", "api-key"];
-  return supportedAuthTypes.includes(type);
-}
 
 export default function updateAuthorizationType(
   state: CurrentRequestState,
@@ -52,11 +12,32 @@ export default function updateAuthorizationType(
       h.key !== state.fields.authorization.apiKey.key
   );
 
-  if (headerMustBeAdded(action.payload)) {
-    updatedHeaders.push(
-      generateAuthorizationHeaderValue(state, action.payload)
-    );
+  switch (action.payload) {
+    case "basic":
+      updatedHeaders.push({
+        key: "Authorization",
+        value: `Basic ${btoa(
+          `${state.fields.authorization.basic.username}:${state.fields.authorization.basic.password}`
+        )}`,
+        active: true,
+      });
+      break;
+    case "bearer-token":
+      updatedHeaders.push({
+        key: "Authorization",
+        value: `Bearer ${state.fields.authorization.bearerToken.token}`,
+        active: true,
+      });
+      break;
+    case "api-key":
+      updatedHeaders.push({
+        key: state.fields.authorization.apiKey.key,
+        value: state.fields.authorization.apiKey.value,
+        active: true,
+      });
+      break;
   }
+
   return {
     ...state,
     fields: {
