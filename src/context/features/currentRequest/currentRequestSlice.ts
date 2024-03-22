@@ -21,6 +21,7 @@ import removeHeaderReducer from "./reducers/headers/removeHeader";
 import updateHeaderReducer from "./reducers/headers/updateHeader";
 import toggleAllHeadersReducer from "./reducers/headers/toggleAllHeaders";
 import updateAuthorizationTypeReducer from "./reducers/authorization/updateAuthorizationType";
+import updateAuthorizationBasicReducer from "./reducers/authorization/updateAuthorizationBasic";
 
 export const submitCurrentRequest =
   () => async (dispatch: AppDispatch, getState: AppGetState) => {
@@ -70,42 +71,7 @@ export const currentRequestSlice = createSlice({
     toggleAllHeaders: toggleAllHeadersReducer,
     // AUTHORIZATION
     updateAuthorizationType: updateAuthorizationTypeReducer,
-    updateAuthorizationBasicUsername: (
-      state,
-      action: PayloadAction<string>
-    ) => {
-      state.fields.headers = state.fields.headers.filter(
-        (header) => header.key !== "Authorization"
-      );
-
-      state.fields.headers.push({
-        key: "Authorization",
-        value: `Basic ${btoa(
-          `${action.payload}:${state.fields.authorization.basic.password}`
-        )}`,
-        active: true,
-      });
-
-      state.fields.authorization.basic.username = action.payload;
-    },
-    updateAuthorizationBasicPassword: (
-      state,
-      action: PayloadAction<string>
-    ) => {
-      state.fields.headers = state.fields.headers.filter(
-        (header) => header.key !== "Authorization"
-      );
-
-      state.fields.headers.push({
-        key: "Authorization",
-        value: `Basic ${btoa(
-          `${state.fields.authorization.basic.username}:${action.payload}`
-        )}`,
-        active: true,
-      });
-
-      state.fields.authorization.basic.password = action.payload;
-    },
+    updateAuthorizationBasic: updateAuthorizationBasicReducer,
     updateAuthorizationBearerToken: (state, action: PayloadAction<string>) => {
       state.fields.headers = state.fields.headers.filter(
         (header) => header.key !== "Authorization"
@@ -273,8 +239,7 @@ export const {
   updateHeader,
   toggleAllHeaders,
   updateAuthorizationType,
-  updateAuthorizationBasicUsername,
-  updateAuthorizationBasicPassword,
+  updateAuthorizationBasic,
   updateAuthorizationBearerToken,
   updateAuthorizationApiKeyKey,
   updateAuthorizationApiKeyValue,
