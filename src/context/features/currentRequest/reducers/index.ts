@@ -11,6 +11,7 @@ import updateAuthorizationType from "./authorization/updateAuthorizationType";
 import updateAuthorizationBasic from "./authorization/updateAuthorizationBasic";
 import updateAuthorizationBearerToken from "./authorization/updateAuthorizationBearerToken";
 import updateAuthorizationApiKey from "./authorization/updateAuthorizationApiKey";
+import updateBodyContentType from "./body/updateBodyContentType";
 
 const reducers = {
   updateUrl,
@@ -26,6 +27,7 @@ const reducers = {
   updateAuthorizationBasic,
   updateAuthorizationBearerToken,
   updateAuthorizationApiKey,
+  updateBodyContentType,
 };
 
 export default reducers;

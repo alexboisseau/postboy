@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import { HttpMethod } from "@core/types/http-method";
 import { HttpResponse } from "@core/types/http-response";
-import { ContentType, RequestErrors, SupportedRawLanguages } from "./types";
+import { RequestErrors, SupportedRawLanguages } from "./types";
 import getContentTypeHeader from "./utils/getContentTypeHeader";
 import { AppDispatch, AppGetState } from "@context/store";
 import { sendHttpRequest } from "@server-actions/send-http-request";
@@ -50,23 +50,6 @@ export const currentRequestSlice = createSlice({
     ...reducers,
     updateHttpMethod: (state, action: PayloadAction<HttpMethod>) => {
       state.fields.httpMethod = action.payload;
-    },
-    // BODY
-    updateBodyContentType: (state, action: PayloadAction<ContentType>) => {
-      state.fields.headers = state.fields.headers.filter(
-        (header) => header.key !== "Content-Type"
-      );
-
-      if (action.payload !== "none") {
-        const contentTypeHeader = getContentTypeHeader(action.payload, state);
-        state.fields.headers.push({
-          key: "Content-Type",
-          value: contentTypeHeader,
-          active: true,
-        });
-      }
-
-      state.fields.body.contentType = action.payload;
     },
     updateBodyRawLanguage: (
       state,
