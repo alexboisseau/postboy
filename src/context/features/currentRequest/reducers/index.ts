@@ -1,3 +1,4 @@
+import updateHttpMethod from "./updateHttpMethod";
 import updateUrl from "./updateUrl";
 import addQueryParameter from "./queryParameters/addQueryParameter";
 import updateQueryParameter from "./queryParameters/updateQueryParameter";
@@ -14,6 +15,7 @@ import updateAuthorizationApiKey from "./authorization/updateAuthorizationApiKey
 import updateBodyContentType from "./body/updateBodyContentType";
 
 const reducers = {
+  updateHttpMethod,
   updateUrl,
   addQueryParameter,
   updateQueryParameter,

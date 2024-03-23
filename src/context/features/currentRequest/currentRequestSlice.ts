@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ActivatableKeyValue } from "@core/types/activatable-key-value";
-import { HttpMethod } from "@core/types/http-method";
 import { HttpResponse } from "@core/types/http-response";
 import { RequestErrors, SupportedRawLanguages } from "./types";
 import getContentTypeHeader from "./utils/getContentTypeHeader";
@@ -48,9 +47,6 @@ export const currentRequestSlice = createSlice({
   initialState,
   reducers: {
     ...reducers,
-    updateHttpMethod: (state, action: PayloadAction<HttpMethod>) => {
-      state.fields.httpMethod = action.payload;
-    },
     updateBodyRawLanguage: (
       state,
       action: PayloadAction<SupportedRawLanguages>
