@@ -1,9 +1,9 @@
-import { ContentType, CurrentRequestState } from "../types";
+import { ContentType, ContentTypeHeader, CurrentRequestState } from "../types";
 
 export default function getContentTypeHeader(
   contentType: ContentType,
   state: CurrentRequestState
-): string {
+): ContentTypeHeader | "" {
   if (contentType === "x-www-form-urlencoded") {
     return "application/x-www-form-urlencoded";
   } else if (contentType === "raw") {
