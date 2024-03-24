@@ -1,4 +1,4 @@
-import { CurrentRequestState } from "@context/features/currentRequest/types";
+import { CurrentRequestState } from "../../../types";
 
 export default function addBodyXWWWFormUrlEncodedRecord(
   state: CurrentRequestState
