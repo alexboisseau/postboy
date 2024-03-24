@@ -2,11 +2,9 @@ import { ChangeEvent, KeyboardEvent } from "react";
 import { Input } from "@components/ui/input";
 import { useAppSelector } from "@context/hooks/use-app-selector";
 import { useAppDispatch } from "@context/hooks/use-app-dispatch";
-import {
-  submitCurrentRequest,
-  updateUrl,
-} from "@context/features/currentRequest/currentRequestSlice";
+import { updateUrl } from "@context/features/currentRequest/currentRequestSlice";
 import { selectCurrentRequest } from "@context/features/currentRequest/currentRequestSelectors";
+import { submitCurrentRequest } from "@context/features/currentRequest/thunks/submitCurrentRequest";
 
 export default function RequestUrlInput() {
   const { fields, errors } = useAppSelector(selectCurrentRequest);

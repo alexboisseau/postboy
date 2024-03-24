@@ -5,9 +5,9 @@ import RequestUrlInput from "./RequestUrlInput";
 import { Button } from "@components/ui/button";
 import { useAppSelector } from "@context/hooks/use-app-selector";
 import { selectCurrentRequest } from "@context/features/currentRequest/currentRequestSelectors";
-import { submitCurrentRequest } from "@context/features/currentRequest/currentRequestSlice";
 import { useAppDispatch } from "@context/hooks/use-app-dispatch";
 import { Send } from "lucide-react";
+import { submitCurrentRequest } from "@context/features/currentRequest/thunks/submitCurrentRequest";
 
 export default function Request() {
   const { fields, isSubmitting } = useAppSelector(selectCurrentRequest);
