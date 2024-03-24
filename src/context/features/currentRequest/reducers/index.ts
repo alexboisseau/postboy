@@ -18,6 +18,7 @@ import updateBodyRawValue from "./body/raw/updateBodyRawValue";
 import addBodyXWWWFormUrlEncodedRecord from "./body/XWWWFormUrlEncoded/addBodyXWWWFormUrlEncodedRecord";
 import updateBodyXWWWFormUrlEncodedRecord from "./body/XWWWFormUrlEncoded/updateBodyXWWWFormUrlEncodedRecord";
 import removeBodyXWWWFormUrlEncodedRecord from "./body/XWWWFormUrlEncoded/removeBodyXWWWFormUrlEncodedRecord";
+import toggleAllBodyXWwwFormUrlEncodedRecords from "./body/XWWWFormUrlEncoded/toggleAllBodyXWwwFormUrlEncodedRecords";
 
 const reducers = {
   updateHttpMethod,
@@ -40,6 +41,7 @@ const reducers = {
   addBodyXWWWFormUrlEncodedRecord,
   updateBodyXWWWFormUrlEncodedRecord,
   removeBodyXWWWFormUrlEncodedRecord,
+  toggleAllBodyXWwwFormUrlEncodedRecords,
 };
 
 export default reducers;

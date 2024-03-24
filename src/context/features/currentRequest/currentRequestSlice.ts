@@ -45,15 +45,6 @@ export const currentRequestSlice = createSlice({
   initialState,
   reducers: {
     ...reducers,
-    toggleAllBodyXWwwFormUrlEncodedRecords: (
-      state,
-      action: PayloadAction<boolean>
-    ) => {
-      state.fields.body.xWwwFormUrlencoded =
-        state.fields.body.xWwwFormUrlencoded.map((record) => {
-          return { ...record, active: action.payload };
-        });
-    },
     invalid: (state, action: PayloadAction<RequestErrors>) => {
       state.errors = action.payload;
       state.isSubmitting = false;
