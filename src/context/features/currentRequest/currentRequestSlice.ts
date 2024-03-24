@@ -46,7 +46,7 @@ export const currentRequestSlice = createSlice({
   initialState,
   reducers: {
     ...reducers,
-    addBodyXWwwFormUrlencodedRecord: (state) => {
+    addBodyXWWWFormUrlEncodedRecord: (state) => {
       state.fields.body.xWwwFormUrlencoded.push({
         key: "",
         value: "",
@@ -136,7 +136,7 @@ export const {
   updateBodyContentType,
   updateBodyRawLanguage,
   updateBodyRawValue,
-  addBodyXWwwFormUrlencodedRecord,
+  addBodyXWWWFormUrlEncodedRecord,
   updateBodyXWwwFormUrlencodedRecord,
   removeBodyXWwwFormUrlencodedRecord,
   checkAllBodyXWwwFormUrlencodedRecords,

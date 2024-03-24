@@ -4,7 +4,7 @@ import { Button } from "@components/ui/button";
 import { useAppSelector } from "@context/hooks/use-app-selector";
 import { useAppDispatch } from "@context/hooks/use-app-dispatch";
 import {
-  addBodyXWwwFormUrlencodedRecord,
+  addBodyXWWWFormUrlEncodedRecord,
   checkAllBodyXWwwFormUrlencodedRecords,
   removeBodyXWwwFormUrlencodedRecord,
   updateBodyXWwwFormUrlencodedRecord,
@@ -22,7 +22,7 @@ export default function FormUrlEncoded() {
   };
 
   const handleAddRecord = () => {
-    dispatch(addBodyXWwwFormUrlencodedRecord());
+    dispatch(addBodyXWWWFormUrlEncodedRecord());
   };
 
   const handleRemoveRecord = (index: number) => {
