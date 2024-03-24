@@ -1,4 +1,4 @@
-import { CurrentRequestState } from "@context/features/currentRequest/types";
+import { CurrentRequestState } from "../../../types";
 import { PayloadAction } from "@reduxjs/toolkit";
 
 export default function updateBodyRawValue(
