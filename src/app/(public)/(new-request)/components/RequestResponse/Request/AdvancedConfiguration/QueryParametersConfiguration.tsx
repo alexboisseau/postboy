@@ -5,7 +5,7 @@ import { useAppSelector } from "@context/hooks/use-app-selector";
 import { useAppDispatch } from "@context/hooks/use-app-dispatch";
 import {
   addQueryParameter,
-  checkAllQueryParameters,
+  toggleAllQueryParameters,
   removeQueryParameter,
   updateQueryParameter,
 } from "@context/features/currentRequest/currentRequestSlice";
@@ -21,7 +21,7 @@ export default function QueryParametersConfiguration() {
       <ActivatableKeyValueTable
         data={queryParameters}
         onCheckAll={(checked: boolean) => {
-          dispatch(checkAllQueryParameters(checked));
+          dispatch(toggleAllQueryParameters(checked));
         }}
         onUpdateRecord={(updatedParam: ActivatableKeyValue, index: number) => {
           dispatch(

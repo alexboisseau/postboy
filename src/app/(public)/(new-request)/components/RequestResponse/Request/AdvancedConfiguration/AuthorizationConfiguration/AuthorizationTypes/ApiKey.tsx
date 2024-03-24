@@ -1,10 +1,7 @@
 import { Input } from "@components/ui/input";
 import { Label } from "@components/ui/label";
 import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
-import {
-  updateAuthorizationApiKeyKey,
-  updateAuthorizationApiKeyValue,
-} from "@context/features/currentRequest/currentRequestSlice";
+import { updateAuthorizationApiKey } from "@context/features/currentRequest/currentRequestSlice";
 import { useAppDispatch } from "@context/hooks/use-app-dispatch";
 import { useAppSelector } from "@context/hooks/use-app-selector";
 
@@ -15,14 +12,12 @@ export default function ApiKeyAuthorization() {
   const dispatch = useAppDispatch();
 
   const handleChange = (value: string, field: "key" | "value") => {
-    switch (field) {
-      case "key":
-        dispatch(updateAuthorizationApiKeyKey(value));
-        break;
-      case "value":
-        dispatch(updateAuthorizationApiKeyValue(value));
-        break;
-    }
+    dispatch(
+      updateAuthorizationApiKey({
+        key: field === "key" ? value : apiKey.key,
+        value: field === "value" ? value : apiKey.value,
+      })
+    );
   };
 
   return (

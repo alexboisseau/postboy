@@ -4,10 +4,10 @@ import { Button } from "@components/ui/button";
 import { useAppSelector } from "@context/hooks/use-app-selector";
 import { useAppDispatch } from "@context/hooks/use-app-dispatch";
 import {
-  addBodyXWwwFormUrlencodedRecord,
-  checkAllBodyXWwwFormUrlencodedRecords,
-  removeBodyXWwwFormUrlencodedRecord,
-  updateBodyXWwwFormUrlencodedRecord,
+  addBodyXWWWFormUrlEncodedRecord,
+  toggleAllBodyXWwwFormUrlEncodedRecords,
+  removeBodyXWWWFormUrlEncodedRecord,
+  updateBodyXWWWFormUrlEncodedRecord,
 } from "@context/features/currentRequest/currentRequestSlice";
 import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
 
@@ -18,15 +18,15 @@ export default function FormUrlEncoded() {
   const dispatch = useAppDispatch();
 
   const handleCheckAll = (checked: boolean) => {
-    dispatch(checkAllBodyXWwwFormUrlencodedRecords(checked));
+    dispatch(toggleAllBodyXWwwFormUrlEncodedRecords(checked));
   };
 
   const handleAddRecord = () => {
-    dispatch(addBodyXWwwFormUrlencodedRecord());
+    dispatch(addBodyXWWWFormUrlEncodedRecord());
   };
 
   const handleRemoveRecord = (index: number) => {
-    dispatch(removeBodyXWwwFormUrlencodedRecord(index));
+    dispatch(removeBodyXWWWFormUrlEncodedRecord(index));
   };
 
   const handleUpdateRecord = (
@@ -34,7 +34,7 @@ export default function FormUrlEncoded() {
     index: number
   ) => {
     dispatch(
-      updateBodyXWwwFormUrlencodedRecord({
+      updateBodyXWWWFormUrlEncodedRecord({
         index,
         record: updatedRecord,
       })

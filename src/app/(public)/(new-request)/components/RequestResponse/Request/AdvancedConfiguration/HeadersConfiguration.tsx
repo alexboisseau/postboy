@@ -5,7 +5,7 @@ import { useAppSelector } from "@context/hooks/use-app-selector";
 import { useAppDispatch } from "@context/hooks/use-app-dispatch";
 import {
   addHeader,
-  checkAllHeaders,
+  toggleAllHeaders,
   removeHeader,
   updateHeader,
 } from "@context/features/currentRequest/currentRequestSlice";
@@ -17,7 +17,7 @@ export default function HeadersConfiguration() {
   const dispatch = useAppDispatch();
 
   const handleCheckedAll = (checked: boolean) => {
-    dispatch(checkAllHeaders(checked));
+    dispatch(toggleAllHeaders(checked));
   };
 
   const handleUpdateParam = (

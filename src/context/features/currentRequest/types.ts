@@ -9,6 +9,10 @@ export type AuthorizationType =
   | "bearer-token"
   | "api-key";
 export type ContentType = "none" | "x-www-form-urlencoded" | "raw";
+export type ContentTypeHeader =
+  | "application/x-www-form-urlencoded"
+  | "application/json"
+  | "application/xml";
 export type SupportedRawLanguages = "json" | "xml";
 
 export type RequestFieldsAuthorization = {
