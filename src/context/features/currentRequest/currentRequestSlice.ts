@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import { HttpResponse } from "@core/types/http-response";
 import { RequestErrors } from "./types";
 import { AppDispatch, AppGetState } from "@context/store";
@@ -46,18 +45,6 @@ export const currentRequestSlice = createSlice({
   initialState,
   reducers: {
     ...reducers,
-    updateBodyXWWWFormUrlencodedRecord: (
-      state,
-      action: PayloadAction<{ record: ActivatableKeyValue; index: number }>
-    ) => {
-      state.fields.body.xWwwFormUrlencoded =
-        state.fields.body.xWwwFormUrlencoded.map((record, index) => {
-          if (index === action.payload.index) {
-            return action.payload.record;
-          }
-          return record;
-        });
-    },
     removeBodyXWwwFormUrlencodedRecord: (
       state,
       action: PayloadAction<number>
@@ -130,7 +117,7 @@ export const {
   updateBodyRawLanguage,
   updateBodyRawValue,
   addBodyXWWWFormUrlEncodedRecord,
-  updateBodyXWWWFormUrlencodedRecord,
+  updateBodyXWWWFormUrlEncodedRecord,
   removeBodyXWwwFormUrlencodedRecord,
   checkAllBodyXWwwFormUrlencodedRecords,
   invalid,

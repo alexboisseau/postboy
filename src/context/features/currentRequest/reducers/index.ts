@@ -16,6 +16,7 @@ import updateBodyContentType from "./body/updateBodyContentType";
 import updateBodyRawLanguage from "./body/raw/updateBodyRawLanguage";
 import updateBodyRawValue from "./body/raw/updateBodyRawValue";
 import addBodyXWWWFormUrlEncodedRecord from "./body/XWWWFormUrlEncoded/addBodyXWWWFormUrlEncodedRecord";
+import updateBodyXWWWFormUrlEncodedRecord from "./body/XWWWFormUrlEncoded/updateBodyXWWWFormUrlEncodedRecord";
 
 const reducers = {
   updateHttpMethod,
@@ -36,6 +37,7 @@ const reducers = {
   updateBodyRawLanguage,
   updateBodyRawValue,
   addBodyXWWWFormUrlEncodedRecord,
+  updateBodyXWWWFormUrlEncodedRecord,
 };
 
 export default reducers;

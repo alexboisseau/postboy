@@ -7,7 +7,7 @@ import {
   addBodyXWWWFormUrlEncodedRecord,
   checkAllBodyXWwwFormUrlencodedRecords,
   removeBodyXWwwFormUrlencodedRecord,
-  updateBodyXWWWFormUrlencodedRecord,
+  updateBodyXWWWFormUrlEncodedRecord,
 } from "@context/features/currentRequest/currentRequestSlice";
 import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
 
@@ -34,7 +34,7 @@ export default function FormUrlEncoded() {
     index: number
   ) => {
     dispatch(
-      updateBodyXWWWFormUrlencodedRecord({
+      updateBodyXWWWFormUrlEncodedRecord({
         index,
         record: updatedRecord,
       })
