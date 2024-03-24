@@ -46,7 +46,7 @@ export const currentRequestSlice = createSlice({
   initialState,
   reducers: {
     ...reducers,
-    updateBodyXWwwFormUrlencodedRecord: (
+    updateBodyXWWWFormUrlencodedRecord: (
       state,
       action: PayloadAction<{ record: ActivatableKeyValue; index: number }>
     ) => {
@@ -130,7 +130,7 @@ export const {
   updateBodyRawLanguage,
   updateBodyRawValue,
   addBodyXWWWFormUrlEncodedRecord,
-  updateBodyXWwwFormUrlencodedRecord,
+  updateBodyXWWWFormUrlencodedRecord,
   removeBodyXWwwFormUrlencodedRecord,
   checkAllBodyXWwwFormUrlencodedRecords,
   invalid,
