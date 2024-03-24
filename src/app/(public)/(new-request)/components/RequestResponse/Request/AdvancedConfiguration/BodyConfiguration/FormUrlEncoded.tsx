@@ -6,7 +6,7 @@ import { useAppDispatch } from "@context/hooks/use-app-dispatch";
 import {
   addBodyXWWWFormUrlEncodedRecord,
   checkAllBodyXWwwFormUrlencodedRecords,
-  removeBodyXWwwFormUrlencodedRecord,
+  removeBodyXWWWFormUrlEncodedRecord,
   updateBodyXWWWFormUrlEncodedRecord,
 } from "@context/features/currentRequest/currentRequestSlice";
 import { selectCurrentRequestFields } from "@context/features/currentRequest/currentRequestSelectors";
@@ -26,7 +26,7 @@ export default function FormUrlEncoded() {
   };
 
   const handleRemoveRecord = (index: number) => {
-    dispatch(removeBodyXWwwFormUrlencodedRecord(index));
+    dispatch(removeBodyXWWWFormUrlEncodedRecord(index));
   };
 
   const handleUpdateRecord = (
