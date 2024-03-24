@@ -5,7 +5,7 @@ import { useAppSelector } from "@context/hooks/use-app-selector";
 import { useAppDispatch } from "@context/hooks/use-app-dispatch";
 import {
   addBodyXWWWFormUrlEncodedRecord,
-  checkAllBodyXWwwFormUrlencodedRecords,
+  toggleAllBodyXWwwFormUrlEncodedRecords,
   removeBodyXWWWFormUrlEncodedRecord,
   updateBodyXWWWFormUrlEncodedRecord,
 } from "@context/features/currentRequest/currentRequestSlice";
@@ -18,7 +18,7 @@ export default function FormUrlEncoded() {
   const dispatch = useAppDispatch();
 
   const handleCheckAll = (checked: boolean) => {
-    dispatch(checkAllBodyXWwwFormUrlencodedRecords(checked));
+    dispatch(toggleAllBodyXWwwFormUrlEncodedRecords(checked));
   };
 
   const handleAddRecord = () => {
