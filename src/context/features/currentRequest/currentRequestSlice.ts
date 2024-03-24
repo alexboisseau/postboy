@@ -46,13 +46,6 @@ export const currentRequestSlice = createSlice({
   initialState,
   reducers: {
     ...reducers,
-    addBodyXWWWFormUrlEncodedRecord: (state) => {
-      state.fields.body.xWwwFormUrlencoded.push({
-        key: "",
-        value: "",
-        active: true,
-      });
-    },
     updateBodyXWwwFormUrlencodedRecord: (
       state,
       action: PayloadAction<{ record: ActivatableKeyValue; index: number }>

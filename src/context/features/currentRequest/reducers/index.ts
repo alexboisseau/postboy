@@ -15,6 +15,7 @@ import updateAuthorizationApiKey from "./authorization/updateAuthorizationApiKey
 import updateBodyContentType from "./body/updateBodyContentType";
 import updateBodyRawLanguage from "./body/raw/updateBodyRawLanguage";
 import updateBodyRawValue from "./body/raw/updateBodyRawValue";
+import addBodyXWWWFormUrlEncodedRecord from "./body/XWWWFormUrlEncoded/addBodyXWWWFormUrlEncodedRecord";
 
 const reducers = {
   updateHttpMethod,
@@ -34,6 +35,7 @@ const reducers = {
   updateBodyContentType,
   updateBodyRawLanguage,
   updateBodyRawValue,
+  addBodyXWWWFormUrlEncodedRecord,
 };
 
 export default reducers;
