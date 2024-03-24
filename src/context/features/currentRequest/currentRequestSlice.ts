@@ -45,15 +45,6 @@ export const currentRequestSlice = createSlice({
   initialState,
   reducers: {
     ...reducers,
-    removeBodyXWWWFormUrlEncodedRecord: (
-      state,
-      action: PayloadAction<number>
-    ) => {
-      state.fields.body.xWwwFormUrlencoded =
-        state.fields.body.xWwwFormUrlencoded.filter(
-          (_, index) => index !== action.payload
-        );
-    },
     checkAllBodyXWwwFormUrlencodedRecords: (
       state,
       action: PayloadAction<boolean>
