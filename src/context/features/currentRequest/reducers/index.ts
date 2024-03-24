@@ -14,6 +14,7 @@ import updateAuthorizationBearerToken from "./authorization/updateAuthorizationB
 import updateAuthorizationApiKey from "./authorization/updateAuthorizationApiKey";
 import updateBodyContentType from "./body/updateBodyContentType";
 import updateBodyRawLanguage from "./body/raw/updateBodyRawLanguage";
+import updateBodyRawValue from "./body/raw/updateBodyRawValue";
 
 const reducers = {
   updateHttpMethod,
@@ -32,6 +33,7 @@ const reducers = {
   updateAuthorizationApiKey,
   updateBodyContentType,
   updateBodyRawLanguage,
+  updateBodyRawValue,
 };
 
 export default reducers;
