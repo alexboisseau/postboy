@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ActivatableKeyValue } from "@core/types/activatable-key-value";
 import { HttpResponse } from "@core/types/http-response";
-import { RequestErrors, SupportedRawLanguages } from "./types";
-import getContentTypeHeader from "./utils/getContentTypeHeader";
+import { RequestErrors } from "./types";
 import { AppDispatch, AppGetState } from "@context/store";
 import { sendHttpRequest } from "@server-actions/send-http-request";
 import validateCurrentRequest from "./utils/validateCurrentRequest";
@@ -47,25 +46,6 @@ export const currentRequestSlice = createSlice({
   initialState,
   reducers: {
     ...reducers,
-    updateBodyRawLanguage: (
-      state,
-      action: PayloadAction<SupportedRawLanguages>
-    ) => {
-      state.fields.body.raw.language = action.payload;
-      state.fields.headers = state.fields.headers.filter(
-        (header) => header.key !== "Content-Type"
-      );
-
-      const contentTypeHeader = getContentTypeHeader(
-        state.fields.body.contentType,
-        state
-      );
-      state.fields.headers.push({
-        key: "Content-Type",
-        value: contentTypeHeader,
-        active: true,
-      });
-    },
     updateBodyRawValue: (state, action: PayloadAction<string>) => {
       state.fields.body.raw.value = action.payload;
     },
